@@ -1,0 +1,16 @@
+<header *ngIf="perfil">
+  <mat-toolbar>
+    <button mat-icon-button (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="espaco">
+      <span>
+        <app-logo size="16px"></app-logo>
+      </span>
+    </span>
+    <button mat-icon-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+</header>

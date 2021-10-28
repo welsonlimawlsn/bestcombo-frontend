@@ -1,0 +1,15 @@
+<app-header-deslogado></app-header-deslogado>
+
+<div class="container">
+  <div class="flex-item" *ngFor="let estabelecimento of esbelecimentos">
+    <a [routerLink]="['/estabelecimentos', estabelecimento.codigo]">
+      <mat-card>
+        <mat-card-title>{{estabelecimento.nome}}</mat-card-title>
+        <div class="image-box">
+          <img mat-card-image [src]="getImageUrl(estabelecimento)" [alt]="'Foto de ' + estabelecimento.nome">
+        </div>
+        <mat-card-content>{{estabelecimento.nome}}</mat-card-content>
+      </mat-card>
+    </a>
+  </div>
+</div>

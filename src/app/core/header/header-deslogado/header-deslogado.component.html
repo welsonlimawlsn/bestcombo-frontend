@@ -1,0 +1,15 @@
+<header *ngIf="!perfil">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <span class="espaco">
+      <span>
+        <app-logo size="16px"></app-logo>
+      </span>
+    </span>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="menu">
+      <a class="item-menu" [routerLink]="['/usuarios', 'cadastro']">crie uma conta</a>
+      <a class="item-menu" href="#" (click)="login()">entre</a>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</header>

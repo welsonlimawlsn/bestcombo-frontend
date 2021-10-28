@@ -1,0 +1,39 @@
+<app-header-deslogado></app-header-deslogado>
+<div class="container" *ngIf="estabelecimento">
+  <h1>{{estabelecimento.nome}}</h1>
+  <img [src]="getImageUrl(estabelecimento.imagem)" [alt]="'Foto do estabelecimento ' + estabelecimento.nome">
+  <div class="row">
+    <div class="col-6">
+      <h2>Produtos</h2>
+      <div>
+        <div class="flex-item" *ngFor="let produto of produtos">
+          <a [routerLink]="['/produtos', produto.codigo]">
+            <mat-card>
+              <mat-card-title>{{produto.nome}}</mat-card-title>
+              <div class="image-box">
+                <img mat-card-image [src]="getImageUrl(produto.imagem)" [alt]="'Foto de ' + produto.nome">
+              </div>
+              <mat-card-content>{{produto.nome}}</mat-card-content>
+            </mat-card>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <h2>Serviços</h2>
+      <div>
+        <div class="flex-item" *ngFor="let servico of servicos">
+          <a [routerLink]="['/produtos', servico.codigo]">
+            <mat-card>
+              <mat-card-title>{{servico.nome}}</mat-card-title>
+              <div class="image-box">
+                <img mat-card-image [src]="getImageUrl(servico.imagem)" [alt]="'Foto de ' + servico.nome">
+              </div>
+              <mat-card-content>{{servico.nome}}</mat-card-content>
+            </mat-card>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

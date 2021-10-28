@@ -1,0 +1,21 @@
+<app-header-deslogado></app-header-deslogado>
+
+<div class="container">
+  <div class="row">
+    <p>Faça a busca de parceiros</p>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <form [formGroup]="formulario">
+        <mat-form-field appearance="fill">
+          <mat-label>termo</mat-label>
+          <input matInput formControlName="pesquisa">
+          <button mat-icon-button matSuffix type="submit" [disabled]="formulario.invalid" (click)="buscaLojas()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+
+</div>

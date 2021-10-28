@@ -1,0 +1,16 @@
+.espaco {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.item-menu {
+  display: inline-block;
+  margin: 0 20px;
+  color: #585858;
+  text-decoration: none;
+}
+
+.menu.mat-toolbar-row {
+  flex-direction: row;
+  justify-content: center;
+}

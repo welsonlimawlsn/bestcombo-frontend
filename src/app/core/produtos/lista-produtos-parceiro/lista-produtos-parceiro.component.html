@@ -1,0 +1,24 @@
+<div class="container">
+  <button mat-button (click)="cadastraProduto()">cadatrar produto</button>
+
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-5 col-xl-3 col-lg-4" *ngFor="let produto of produtos">
+      <mat-card>
+        <mat-card-title>{{produto.nome}}</mat-card-title>
+        <mat-card-subtitle>{{produto.descricao}}</mat-card-subtitle>
+        <div class="image-box">
+          <img mat-card-image [src]="getImageUrl(produto)" [alt]="'Foto de ' + produto.nome">
+        </div>
+        <mat-card-content>{{produto.preco | currency : 'BRL' : 'symbol' : '1.2-2' : 'pt_BR'}}</mat-card-content>
+        <mat-card-actions>
+          <button mat-icon-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row" *ngIf="saldos">
+    <div class="col-4">
+      <h2>saldo disponivel</h2>
+      <p>{{saldos.valorDisponivel | currency}}</p>
+      <mat-form-field appearance="fill" *ngIf="!algumaSolicitacaoSaqueAndamento">
+        <mat-label>valor de saque</mat-label>
+        <input moeda matInput [formControl]="valorSaque">
+        <button mat-icon-button matSuffix type="submit" [disabled]="valorSaque.invalid" (click)="pedidoSaque()">
+          <mat-icon>send</mat-icon>
+        </button>
+        <mat-error *ngIf="valorSaque.errors?.required">Campo obrigatório</mat-error>
+        <mat-error *ngIf="valorSaque.errors?.min">O valor minimo para saque é R$ 1,00</mat-error>
+        <mat-error *ngIf="valorSaque.errors?.max">O valor máximo para saque é {{valorSaque.errors?.max.max | currency}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-4">
+      <h2>saldo a receber</h2>
+      <p>{{saldos.valorAReceber | currency}}</p>
+    </div>
+    <div class="col-4">
+      <h2>chave pix</h2>
+      <mat-form-field appearance="fill" *ngIf="!chavePix">
+        <mat-label>chave pix</mat-label>
+        <input matInput [formControl]="chavePixControl">
+        <button mat-icon-button matSuffix type="submit" [disabled]="chavePixControl.invalid" (click)="adicionaChavePix()">
+          <mat-icon>send</mat-icon>
+        </button>
+      </mat-form-field>
+      <p *ngIf="chavePix">
+        {{chavePix}}
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <h2>Extrato dos últimos 7 dias</h2>
+    <div class="col-12">
+      <table style="width: 100%;" mat-table [dataSource]="movimentos">
+
+        <ng-container matColumnDef="codigo">
+          <th mat-header-cell *matHeaderCellDef>Código</th>
+          <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="codigoPedido">
+          <th mat-header-cell *matHeaderCellDef>Código Pedido</th>
+          <td mat-cell *matCellDef="let element"> {{element.codigoPedido}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataHora">
+          <th mat-header-cell *matHeaderCellDef>Data/Hora</th>
+          <td mat-cell *matCellDef="let element"> {{element.dataHora | date : 'dd/MM/yyyy HH:mm'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataHoraEfetivacao">
+          <th mat-header-cell *matHeaderCellDef>Data disponibilização</th>
+          <td mat-cell *matCellDef="let element"> {{element.dataHoraEfetivacao | date : 'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="descricao">
+          <th mat-header-cell *matHeaderCellDef>Descrição</th>
+          <td mat-cell *matCellDef="let element"> {{element.descricao}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="valor">
+          <th mat-header-cell *matHeaderCellDef>Valor</th>
+          <td mat-cell *matCellDef="let element"> {{element.valor | currency}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </div>
+</div>

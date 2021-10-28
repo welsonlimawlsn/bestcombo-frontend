@@ -1,0 +1,15 @@
+<app-header-deslogado></app-header-deslogado>
+
+<div class="container" *ngIf="produto">
+  <h1>{{produto.nome}}</h1>
+  <img [src]="getImageUrl(produto.imagem)" [alt]="'Foto de ' + produto.nome">
+  <p>{{produto.descricao}}</p>
+
+  <ul>
+    <li>Valor: {{produto.preco | currency}}</li>
+    <li>Serve: {{produto.quantidadePessoas}} pessoas</li>
+    <li>Categorias: {{getCategorias()}}</li>
+  </ul>
+
+  <button mat-button type="button" (click)="efetuarPedido()">efetuar pedido</button>
+</div>

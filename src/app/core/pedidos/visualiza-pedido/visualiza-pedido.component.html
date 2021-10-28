@@ -1,0 +1,61 @@
+<h1 class="inverso" mat-dialog-title>informações do pedido</h1>
+<mat-dialog-content>
+  <h2 class="inverso">Pedido</h2>
+  <ul>
+    <li>Código: {{pedido.codigo}}</li>
+    <li>Valor: {{pedido.valorTotal | currency}}</li>
+    <li>Data realização do pedido: {{pedido.dataHoraCadastro | date}}</li>
+    <li>Data do evento: {{pedido.dataHoraAgendamento | date}}</li>
+    <li>Situacao: {{pedido.situacao}}</li>
+    <li>Observação: {{pedido.observacao}}</li>
+    <li *ngIf="pedido.motivoCancelamento">Motivo Cancelamento: {{pedido.motivoCancelamento}}</li>
+  </ul>
+
+  <div *ngIf="isCliente">
+    <h2 class="inverso">Estabelecimento</h2>
+    <ul>
+      <li>Nome: {{pedido.loja.nome}}</li>
+      <li>CNPJ: {{pedido.loja.cnpj}}</li>
+      <li>Descrição: {{pedido.loja.descricao}}</li>
+    </ul>
+  </div>
+
+  <div *ngIf="isParceiro">
+    <h2 class="inverso">Cliente</h2>
+    <ul>
+      <li>Nome: {{pedido.cliente.nome + ' ' + pedido.cliente.sobrenome}}</li>
+      <li>CPF: {{pedido.cliente.cpf}}</li>
+      <li>E-mail: {{pedido.cliente.email}}</li>
+      <li> Endereço:
+        <ul>
+          <li>CEP: {{pedido.cliente.enderecos[0].cep}}</li>
+          <li>Rua: {{pedido.cliente.enderecos[0].rua}}</li>
+          <li>Cidade: {{pedido.cliente.enderecos[0].cidade}}</li>
+          <li>Bairro: {{pedido.cliente.enderecos[0].bairro}}</li>
+          <li>Estado: {{pedido.cliente.enderecos[0].estado}}</li>
+          <li>Número: {{pedido.cliente.enderecos[0].numero}}</li>
+          <li>Complemento: {{pedido.cliente.enderecos[0].complemento}}</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <h2 class="inverso">Produto/Serviço</h2>
+    <ul *ngFor="let produto of pedido.produtos">
+      <li>Código: {{produto.codigo}}</li>
+      <li>Nome: {{produto.nome}}</li>
+      <li>Descrição: {{produto.descricao}}</li>
+      <li>Preço Unitario: {{produto.preco | currency}}</li>
+      <li>Serve: {{produto.quantidadePessoas}}</li>
+      <li>Quantidade: {{produto.quantidade}}</li>
+    </ul>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="isParceiro && pedido.situacao === 'PEDIDO_AGUARDANDO_APROVACAO_PARCEIRO'">
+  <button mat-button color="accent" type="button" (click)="recusaPedido()">recusar</button>
+  <button mat-button color="accent" type="button" (click)="aceitaPedido()">aceitar</button>
+</mat-dialog-actions>
+<mat-dialog-actions *ngIf="podeConcluirPedido()">
+  <button mat-button color="accent" type="button" (click)="concluiPedido()">concluir</button>
+</mat-dialog-actions>

@@ -1,0 +1,21 @@
+.image-box {
+  height: 200px;
+  width: calc(100% + 32px);
+  overflow: hidden;
+  margin: 0 -16px 16px -16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #C92020;
+}
+
+.mat-card-subtitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.image-box .mat-card-image {
+  margin: 0;
+  width: 100%;
+}
