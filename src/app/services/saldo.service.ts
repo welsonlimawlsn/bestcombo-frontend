@@ -19,4 +19,10 @@ export class SaldoService {
       this.http.get<any>(`${environment.backendUrl}/saldos`)
     )
   }
+
+  consultaSaldosBestcombo() {
+    return this.requisaoService.requisita(
+      this.http.get<any>(`${environment.backendUrl}/saldos/bestcombo`)
+    );
+  }
 }
