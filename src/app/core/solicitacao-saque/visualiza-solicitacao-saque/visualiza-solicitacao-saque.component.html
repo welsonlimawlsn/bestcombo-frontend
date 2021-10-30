@@ -1,0 +1,11 @@
+<ul>
+  <li>Código: {{data.codigo}}</li>
+  <li>Data Cadastro: : {{data.dataCadastro | date : 'dd/MM/yyyy HH:mm'}}</li>
+  <li>Data Última Atualização: {{data.dataUltimaAtualizacao | date : 'dd/MM/yyyy HH:mm'}}</li>
+  <li>Situação: {{data.situacaoSolicitacaoSaque}}</li>
+  <li>Valor: {{data.valor | currency}}</li>
+  <li>Chave Pix: {{data.chavePix}}</li>
+</ul>
+
+<button mat-button color="accent" (click)="colocaEmAndamento()" *ngIf="data.situacaoSolicitacaoSaque === 'SOLICITADO'">Avançar: Em Andamento</button>
+<button mat-button color="accent" (click)="colocaConcluido()" *ngIf="data.situacaoSolicitacaoSaque === 'EM_ANDAMENTO'">Avançar: Concluido</button>

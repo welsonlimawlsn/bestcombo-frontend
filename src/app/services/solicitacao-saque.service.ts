@@ -28,4 +28,16 @@ export class SolicitacaoSaqueService {
       }
     )
   }
+
+  consultaSolicitacoesPendentes() {
+    return this.requisicaoService.requisita(
+      this.http.get<any>(`${environment.backendUrl}/solicitacao-saque`)
+    )
+  }
+
+  alteraSituacaoSolicitacao(codigo: string, situacao: string) {
+    return this.requisicaoService.requisita(
+      this.http.patch<any>(`${environment.backendUrl}/solicitacao-saque/${codigo}`, {situacaoSolicitacaoSaque: situacao})
+    );
+  }
 }

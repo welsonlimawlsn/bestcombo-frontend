@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BuscaEstabelecimentoClienteComponent} from "./core/estabelecimentos/busca-estabelecimento-cliente/busca-estabelecimento-cliente.component";
 import {PaginaNaoEncontradaComponent} from "./pagina-nao-encontrada/pagina-nao-encontrada.component";
+import {AuthGuardService} from "./services/auth-guard.service";
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'clientes',
     loadChildren: () => import('./core/clientes/clientes.module').then(m => m.ClientesModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./core/admin/admin.module').then(m => m.AdminModule)
   },
   {
     path: 'pagina-nao-encontrada',

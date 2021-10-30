@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   perfil!: KeycloakProfile;
   menu = [
     {texto: 'Inicio', link: '/parceiros', roles: ['PAPEL_PARCEIRO']},
-    {texto: 'Parceiros', link: '/parceiros/listar', roles: ['PAPEL_ADMINISTRADOR']},
+    {texto: 'Inicio', link: '/admin/dashboard', roles: ['PAPEL_ADMINISTRADOR']},
     {texto: 'Produtos', link: '/parceiros/produtos', roles: ['PAPEL_PARCEIRO']},
     {texto: 'Pedidos', link: '/parceiros/pedidos', roles: ['PAPEL_PARCEIRO']},
     {texto: 'Extrato', link: '/parceiros/extrato', roles: ['PAPEL_PARCEIRO']},
