@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row">
+  <div class="row" *ngIf="saldos">
     <div class="col">
       <h2>Valor recebido</h2>
       <p>{{saldos.valorDisponivel| currency}}</p>
@@ -10,6 +10,44 @@
     </div>
   </div>
   <div class="row">
+    <div class="col">
+      <h2>Extrato 7 últimos dias</h2>
+      <table style="width: 100%;" mat-table [dataSource]="movimentos">
+
+        <ng-container matColumnDef="codigo">
+          <th mat-header-cell *matHeaderCellDef>Código</th>
+          <td mat-cell *matCellDef="let movimento"> {{movimento.codigo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="codigoPedido">
+          <th mat-header-cell *matHeaderCellDef>Código Pedido</th>
+          <td mat-cell *matCellDef="let movimento"> {{movimento.codigoPedido}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataHora">
+          <th mat-header-cell *matHeaderCellDef>Data/Hora</th>
+          <td mat-cell *matCellDef="let movimento"> {{movimento.dataHora | date : 'dd/MM/yyyy HH:mm'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataHoraEfetivacao">
+          <th mat-header-cell *matHeaderCellDef>Data disponibilização</th>
+          <td mat-cell *matCellDef="let movimento"> {{movimento.dataHoraEfetivacao | date : 'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="descricao">
+          <th mat-header-cell *matHeaderCellDef>Descrição</th>
+          <td mat-cell *matCellDef="let movimento"> {{movimento.descricao}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="valor">
+          <th mat-header-cell *matHeaderCellDef>Valor</th>
+          <td mat-cell *matCellDef="let movimento"> {{movimento.valor | currency}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsExtrato"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsExtrato;"></tr>
+      </table>
+    </div>
     <div class="col">
       <h2>
         Solicitações de Saque

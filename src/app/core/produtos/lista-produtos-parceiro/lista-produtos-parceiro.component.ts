@@ -53,4 +53,8 @@ export class ListaProdutosParceiroComponent implements OnInit {
   getImageUrl(produto: any) {
     return ArquivoService.getImageUrl(produto.imagem);
   }
+
+  exclui(produto: any) {
+    this.produtoService.excluiProduto(produto.codigo).subscribe(() => this.atualizaProdutos());
+  }
 }

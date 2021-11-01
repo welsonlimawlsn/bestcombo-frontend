@@ -11,10 +11,7 @@
         </div>
         <mat-card-content>{{produto.preco | currency : 'BRL' : 'symbol' : '1.2-2' : 'pt_BR'}}</mat-card-content>
         <mat-card-actions>
-          <button mat-icon-button>
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button>
+          <button mat-icon-button type="button" (click)="exclui(produto)">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-card-actions>

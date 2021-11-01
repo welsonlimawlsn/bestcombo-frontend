@@ -23,4 +23,14 @@ export class MovimentosService {
       })
     )
   }
+
+  consultaMovimentosBestCombo(dataInicio: Date) {
+    return this.requisicaoService.requisita(
+      this.http.get<any>(`${environment.backendUrl}/movimentos/bestcombo`, {
+        params: {
+          dataInicio: dataInicio.toISOString()
+        }
+      })
+    )
+  }
 }

@@ -33,4 +33,10 @@ export class ProdutosService {
       this.http.get<BuscaProdutoUnicoResponse>(`${environment.backendUrl}/publico/produtos/${codigo}`)
     );
   }
+
+  excluiProduto(codigo: string) {
+    return this.requestSevice.requisita(
+      this.http.delete(`${environment.backendUrl}/produtos/${codigo}`)
+    )
+  }
 }
