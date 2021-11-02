@@ -35,6 +35,7 @@ export class CadastroUsuarioComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       usuario: ['', Validators.required],
       senha: ['', Validators.required],
+      telefone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(11)]],
       endereco: this.fb.group({
         cep: ['', Validators.required],
         rua: [{value: '', disabled: true}, Validators.required],
@@ -70,7 +71,7 @@ export class CadastroUsuarioComponent implements OnInit {
     if (this.formulario.valid) {
       if (this.formulario.get('parceiro')?.value) {
         this.parceiroService.cadastraParceiro(this.formulario.value).subscribe(async response => {
-          await this.fazerLogin('/parceiros/produtos');
+          await this.fazerLogin('/parceiros/estabelecimento/cadastro');
         });
       } else {
         this.clienteSetvice.cadastrarCliente(this.formulario.value).subscribe(async response => {

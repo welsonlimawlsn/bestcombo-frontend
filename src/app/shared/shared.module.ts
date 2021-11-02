@@ -8,6 +8,7 @@ import {AngularMaterialModule} from "../angular-material/angular-material.module
 import {ReactiveFormsModule} from "@angular/forms";
 import {MascaraDirective} from './directives/mascara.directive';
 import {MoedaDirective} from './directives/moeda.directive';
+import {TelefoneDirective} from "./directives/telefone.directive";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {MoedaDirective} from './directives/moeda.directive';
     LoadingComponent,
     ErroDialogComponent,
     MascaraDirective,
-    MoedaDirective
+    MoedaDirective,
+    TelefoneDirective
   ],
   imports: [
     CommonModule,
@@ -33,7 +35,8 @@ import {MoedaDirective} from './directives/moeda.directive';
     ReactiveFormsModule,
     RouterModule,
     MascaraDirective,
-    MoedaDirective
+    MoedaDirective,
+    TelefoneDirective
   ]
 })
 export class SharedModule {

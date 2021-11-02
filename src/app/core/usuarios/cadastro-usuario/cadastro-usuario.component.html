@@ -38,13 +38,23 @@
           </mat-form-field>
         </div>
 
-        <div>
-          <mat-form-field appearance="fill">
-            <mat-label>E-mail</mat-label>
-            <input matInput formControlName="email">
-            <mat-error *ngIf="formulario.get('email')?.errors?.email">E-mail inválido</mat-error>
-            <mat-error *ngIf="formulario.get('email')?.errors?.required">Campo obrigatório</mat-error>
-          </mat-form-field>
+        <div class="row">
+          <div class="col-md-12 col-lg-6">
+            <mat-form-field appearance="fill">
+              <mat-label>Telefone</mat-label>
+              <input telefone matInput formControlName="telefone">
+              <mat-error *ngIf="formulario.get('telefone')?.errors?.required">Campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('telefone')?.errors?.minlength">Telefone inválido</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-12 col-lg-6">
+            <mat-form-field appearance="fill">
+              <mat-label>E-mail</mat-label>
+              <input matInput formControlName="email">
+              <mat-error *ngIf="formulario.get('email')?.errors?.email">E-mail inválido</mat-error>
+              <mat-error *ngIf="formulario.get('email')?.errors?.required">Campo obrigatório</mat-error>
+            </mat-form-field>
+          </div>
         </div>
 
         <div class="row">
