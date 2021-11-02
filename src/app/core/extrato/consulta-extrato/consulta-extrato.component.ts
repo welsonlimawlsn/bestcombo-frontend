@@ -35,23 +35,27 @@ export class ConsultaExtratoComponent implements OnInit {
     ultimaSemana.setHours(0, 0, 0, 0);
     ultimaSemana.setDate(ultimaSemana.getDate() - 7);
 
-    forkJoin({
-      saldos: this.saldoService.consultaSaldos(),
-      movimentos: this.movimentoService.consultaMovimentos(ultimaSemana),
-      estabelecimento: this.estabelecimentoService.buscaEstabelecimentoParceiroLogado()
-    }).subscribe(responses => {
-      this.movimentos = responses.movimentos.movimentos;
-      this.saldos = responses.saldos;
-      this.chavePix = responses.estabelecimento.chavePix;
+    this.estabelecimentoService.buscaEstabelecimentoParceiroLogado().subscribe(
+      (estabelecimento) => {
+        this.chavePix = estabelecimento.chavePix;
+        forkJoin({
+          saldos: this.saldoService.consultaSaldos(),
+          movimentos: this.movimentoService.consultaMovimentos(ultimaSemana),
+        }).subscribe(responses => {
+          this.movimentos = responses.movimentos.movimentos;
+          this.saldos = responses.saldos;
 
-      this.valorSaque.setValidators([Validators.required, Validators.min(1), Validators.max(this.saldos.valorDisponivel)]);
-    });
+          this.valorSaque.setValidators([Validators.required, Validators.min(1), Validators.max(this.saldos.valorDisponivel)]);
+        });
+        this.solicitacaoSaqueService.consultaSolicitacaoSaqueAndamento()
+          .subscribe(
+            () => this.algumaSolicitacaoSaqueAndamento = true,
+            () => this.algumaSolicitacaoSaqueAndamento = false
+          )
+      }
+    );
 
-    this.solicitacaoSaqueService.consultaSolicitacaoSaqueAndamento()
-      .subscribe(
-        () => this.algumaSolicitacaoSaqueAndamento = true,
-        () => this.algumaSolicitacaoSaqueAndamento = false
-      )
+
   }
 
   adicionaChavePix() {

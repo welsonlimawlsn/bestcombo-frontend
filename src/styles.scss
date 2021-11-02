@@ -65,6 +65,18 @@ body {
   color: #FFF;
 }
 
+.mat-option-text, .mat-select-value-text {
+  font-family: 'Quicksand', "Helvetica Neue", sans-serif;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #b41d1d;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+  background-color: #b41d1d;
+}
+
 
 .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
   box-sizing: border-box;

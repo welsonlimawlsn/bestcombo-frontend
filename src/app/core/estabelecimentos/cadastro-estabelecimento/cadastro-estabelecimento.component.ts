@@ -45,6 +45,7 @@ export class CadastroEstabelecimentoComponent implements OnInit {
       descricao: ['', [Validators.required, Validators.maxLength(500)]],
       categorias: [[], Validators.required],
       imagem: [''],
+      telefone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(11)]],
       endereco: this.fb.group({
         cep: ['', [Validators.required, Validators.minLength(8)]],
         numero: ['', Validators.required],
@@ -80,7 +81,7 @@ export class CadastroEstabelecimentoComponent implements OnInit {
           this.formulario.get('imagem')?.setValue(response.nomeArquivo);
           return this.estabelecimentoService.cadastraEstabelecimento(this.formulario.value);
         })
-      ).subscribe(() => this.router.navigate(['parceiros']));
+      ).subscribe(() => this.router.navigate(['/parceiros', 'produtos']));
     }
   }
 

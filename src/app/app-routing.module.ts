@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BuscaEstabelecimentoClienteComponent} from "./core/estabelecimentos/busca-estabelecimento-cliente/busca-estabelecimento-cliente.component";
 import {PaginaNaoEncontradaComponent} from "./pagina-nao-encontrada/pagina-nao-encontrada.component";
-import {AuthGuardService} from "./services/auth-guard.service";
 
 const routes: Routes = [
   {
