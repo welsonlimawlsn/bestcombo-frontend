@@ -39,11 +39,13 @@ export class ListaProdutosParceiroComponent implements OnInit {
     forkJoin({
       estabelecimento: this.estabelecimentoService.buscaEstabelecimentoParceiroLogado(),
       categorias: this.categoriaService.listaCategorias()
-    }).pipe(switchMap(response => {
-      return this.dialog.open(CadastroProdutosComponent, {
-        data: response
-      }).afterClosed()
-    })).subscribe(value => {
+    }).pipe(
+      switchMap(response => {
+        return this.dialog.open(CadastroProdutosComponent, {
+          data: response
+        }).afterClosed()
+      })
+    ).subscribe(value => {
       if (value) {
         this.atualizaProdutos();
       }

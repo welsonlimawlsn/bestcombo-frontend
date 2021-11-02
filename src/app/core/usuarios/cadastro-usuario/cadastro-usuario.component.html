@@ -3,132 +3,126 @@
     <app-logo></app-logo>
   </div>
   <div class="row">
-    <div class="col p-3">
-      <h1>olá, parceiro! entre ou crie a sua conta para começar a vender seus produtos!</h1>
+    <div class="col-md-5 col-sm-12 p-3">
+      <h2>Você já tem uma conta?</h2>
+      <h3>Você pode entrar clicando no botão abaixo!</h3>
+      <button mat-button (click)="fazerLogin('/usuarios')">Entrar</button>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6 col-sm-12 p-3">
-      <h2>você já tem uma conta?</h2>
-      <h3>você pode entrar clicando no botão abaixo!</h3>
-      <button mat-button (click)="fazerLogin('/usuarios')">entrar</button>
-    </div>
-    <div class="col-md-6 col-sm-12 left-md-divider p-3 pe-lg-5 ps-lg-5">
-      <h2>você ainda não tem uma conta?</h2>
-      <h3>preencha com os seus dados pessoais no formulário abaixo e posteriormente pediremos informações do seu
-        estabelecimento</h3>
+    <div class="col-md-7 col-sm-12 left-md-divider p-3 pe-lg-5 ps-lg-5">
+      <h2>Você ainda não tem uma conta?</h2>
+      <h3>Preencha com os seus dados pessoais no formulário abaixo!</h3>
       <form [formGroup]="formulario" autocomplete="off">
         <div class="row">
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
-              <mat-label>nome</mat-label>
+              <mat-label>Nome</mat-label>
               <input matInput formControlName="nome">
-              <mat-error *ngIf="formulario.get('nome')?.invalid">campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('nome')?.invalid">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
-              <mat-label>sobrenome</mat-label>
+              <mat-label>Sobrenome</mat-label>
               <input matInput formControlName="sobrenome">
-              <mat-error *ngIf="formulario.get('sobrenome')?.invalid">campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('sobrenome')?.invalid">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
         </div>
 
         <div>
           <mat-form-field appearance="fill">
-            <mat-label>cpf</mat-label>
+            <mat-label>CPF</mat-label>
             <input matInput mascara="###.###.###-##" formControlName="cpf" maxlength="14">
-            <mat-error *ngIf="formulario.get('cpf')?.errors?.cpfInvalido">cpf invalido</mat-error>
-            <mat-error *ngIf="formulario.get('cpf')?.errors?.required">campo obrigatório</mat-error>
+            <mat-error *ngIf="formulario.get('cpf')?.errors?.cpfInvalido">CPF inválido</mat-error>
+            <mat-error *ngIf="formulario.get('cpf')?.errors?.required">Campo obrigatório</mat-error>
           </mat-form-field>
         </div>
 
         <div>
           <mat-form-field appearance="fill">
-            <mat-label>e-mail</mat-label>
+            <mat-label>E-mail</mat-label>
             <input matInput formControlName="email">
-            <mat-error *ngIf="formulario.get('email')?.errors?.email">e-mail inválido</mat-error>
-            <mat-error *ngIf="formulario.get('email')?.errors?.required">campo obrigatório</mat-error>
+            <mat-error *ngIf="formulario.get('email')?.errors?.email">E-mail inválido</mat-error>
+            <mat-error *ngIf="formulario.get('email')?.errors?.required">Campo obrigatório</mat-error>
           </mat-form-field>
         </div>
 
         <div class="row">
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
-              <mat-label>usuário</mat-label>
+              <mat-label>Usuário</mat-label>
               <input matInput formControlName="usuario">
-              <mat-error *ngIf="formulario.get('usuario')?.invalid">campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('usuario')?.invalid">Campo brigatório</mat-error>
             </mat-form-field>
           </div>
 
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
-              <mat-label>senha</mat-label>
+              <mat-label>Senha</mat-label>
               <input matInput type="password" formControlName="senha">
-              <mat-error *ngIf="formulario.get('senha')?.invalid">campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('senha')?.invalid">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
         </div>
 
         <div formGroupName="endereco" class="row">
-          <h3>informe o endereço de sua residência</h3>
+          <h3>Informe o endereço de sua residência</h3>
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
-              <mat-label>cep</mat-label>
+              <mat-label>CEP</mat-label>
               <input mascara="#####-###" matInput formControlName="cep">
-              <mat-error *ngIf="formulario.get('endereco.cep')?.invalid">campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('endereco.cep')?.invalid">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
           <div class="col-12">
             <mat-form-field appearance="fill">
-              <mat-label>rua</mat-label>
+              <mat-label>Rua</mat-label>
               <input matInput formControlName="rua">
-              <mat-error *ngIf="formulario.get('endereco.rua')?.invalid">campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('endereco.rua')?.invalid">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
           <div class="col-12">
             <mat-form-field appearance="fill">
-              <mat-label>bairro</mat-label>
+              <mat-label>Bairro</mat-label>
               <input matInput formControlName="bairro">
-              <mat-error *ngIf="formulario.get('endereco.bairro')?.invalid">campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('endereco.bairro')?.invalid">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
-              <mat-label>cidade</mat-label>
+              <mat-label>Cidade</mat-label>
               <input matInput formControlName="cidade">
-              <mat-error *ngIf="formulario.get('endereco.cidade')?.invalid">campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('endereco.cidade')?.invalid">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
-              <mat-label>estado</mat-label>
+              <mat-label>Estado</mat-label>
               <input matInput formControlName="estado">
-              <mat-error *ngIf="formulario.get('endereco.estado')?.invalid">campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('endereco.estado')?.invalid">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
-              <mat-label>complemento</mat-label>
+              <mat-label>Complemento</mat-label>
               <input matInput formControlName="complemento">
-              <mat-error *ngIf="formulario.get('endereco.complemento')?.invalid">campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('endereco.complemento')?.invalid">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
-              <mat-label>número</mat-label>
+              <mat-label>Número</mat-label>
               <input matInput formControlName="numero">
-              <mat-error *ngIf="formulario.get('endereco.numero')?.invalid">campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('endereco.numero')?.invalid">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
         </div>
 
         <div class="col-12">
-          <mat-checkbox formControlName="parceiro">cadastrar como parceiro</mat-checkbox>
+          <mat-checkbox formControlName="parceiro">Cadastrar como parceiro</mat-checkbox>
         </div>
 
-        <button mat-button type="submit" [disabled]="formulario.invalid" (click)="cadastraUsuario()">cadastrar</button>
+        <button mat-button type="submit" [disabled]="formulario.invalid" (click)="cadastraUsuario()">Cadastrar</button>
       </form>
     </div>
   </div>

@@ -29,8 +29,6 @@ export class RequisicaoService {
           });
         }
         throw err;
-
-        return caught;
       })
     );
   }

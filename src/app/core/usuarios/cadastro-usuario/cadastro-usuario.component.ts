@@ -4,8 +4,9 @@ import {ParceiroService} from "../../../services/parceiro.service";
 import {UsuarioService} from "../../../services/usuario.service";
 import {EnderecoService} from "../../../services/endereco.service";
 import {cpfValidator} from "../../../services/validators/cpf-validator";
-import {filter, switchMap} from "rxjs/operators";
+import {catchError, distinct, filter, switchMap} from "rxjs/operators";
 import {ClienteService} from "../../../services/cliente.service";
+import {Observable, of} from "rxjs";
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -46,10 +47,16 @@ export class CadastroUsuarioComponent implements OnInit {
       parceiro: [false]
     });
 
-    this.formulario.get('endereco.cep')?.valueChanges.pipe(
+    this.subscribeCEPControl().subscribe(endereco => this.atualizaEndereco(endereco));
+  }
+
+  private subscribeCEPControl(): Observable<any> {
+    return this.formulario.get('endereco.cep')?.valueChanges.pipe(
       filter(cep => cep.length === 8),
-      switchMap((cep) => this.enderecoService.buscaEnderecoPorCEP(cep))
-    ).subscribe(endereco => this.atualizaEndereco(endereco));
+      distinct(),
+      switchMap((cep) => this.enderecoService.buscaEnderecoPorCEP(cep)),
+      catchError(() => this.subscribeCEPControl())
+    ) ?? of();
   }
 
   private atualizaEndereco(endereco: any) {
@@ -63,11 +70,11 @@ export class CadastroUsuarioComponent implements OnInit {
     if (this.formulario.valid) {
       if (this.formulario.get('parceiro')?.value) {
         this.parceiroService.cadastraParceiro(this.formulario.value).subscribe(async response => {
-          await this.fazerLogin('/parceiros');
+          await this.fazerLogin('/parceiros/produtos');
         });
       } else {
         this.clienteSetvice.cadastrarCliente(this.formulario.value).subscribe(async response => {
-          await this.fazerLogin('/cliente');
+          await this.fazerLogin('/');
         });
       }
     }

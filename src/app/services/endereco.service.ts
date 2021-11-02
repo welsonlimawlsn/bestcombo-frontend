@@ -17,7 +17,7 @@ export class EnderecoService {
 
   buscaEnderecoPorCEP(cep: string) {
     return this.requisicaoService.requisita(
-      this.http.get(`${environment.backendUrl}/publico/endereco/${cep}`), {showLoading: true}
+      this.http.get(`${environment.backendUrl}/publico/endereco/${cep}`)
     )
   }
 }

@@ -1,7 +1,9 @@
-<h1>ops! ocorreu um erro...</h1>
-
-<p *ngFor="let mensagem of data?.erro?.error?.mensagens">{{mensagem}}</p>
+<h1 class="inverso">Ops! ocorreu um erro...</h1>
+<p *ngIf="mensagem">{{mensagem}}</p>
+<div *ngIf="!mensagem">
+  <p *ngFor="let mensagem of data?.erro?.error?.mensagens">{{mensagem}}</p>
+</div>
 
 <p>
-  <button mat-button color="accent" mat-dialog-close type="button">ok</button>
+  <button mat-button color="accent" mat-dialog-close type="button">OK</button>
 </p>
