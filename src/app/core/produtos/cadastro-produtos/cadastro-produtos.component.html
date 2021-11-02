@@ -1,39 +1,41 @@
 <div *ngIf="formulario" class="row text-align-center">
-  <h1 mat-dialog-title class="inverso">novo produto</h1>
+  <div mat-dialog-title>
+    <app-header-dialog titulo="Novo Produto" (onFechar)="fechar()"></app-header-dialog>
+  </div>
   <mat-dialog-content>
     <form autocomplete="off" [formGroup]="formulario">
       <div>
         <mat-form-field class="inverso">
-          <mat-label>nome do produto</mat-label>
+          <mat-label>Nome do produto</mat-label>
           <input matInput formControlName="nome">
-          <mat-error class="inverso" *ngIf="formulario.get('nome')?.errors?.required">campo obrigatório</mat-error>
+          <mat-error class="inverso" *ngIf="formulario.get('nome')?.errors?.required">Campo obrigatório</mat-error>
         </mat-form-field>
 
         <mat-form-field class="inverso">
-          <mat-label>descrição</mat-label>
+          <mat-label>Descrição</mat-label>
           <textarea matInput formControlName="descricao" rows="3"></textarea>
           <mat-error class="inverso" *ngIf="formulario.get('descricao')?.errors?.required">campo obrigatório</mat-error>
         </mat-form-field>
 
         <mat-form-field class="inverso">
-          <mat-label>preço</mat-label>
+          <mat-label>Preço</mat-label>
           <input moeda matInput formControlName="preco">
-          <mat-error class="inverso" *ngIf="formulario.get('preco')?.errors?.required">campo obrigatório</mat-error>
-          <mat-error class="inverso" *ngIf="formulario.get('preco')?.errors?.min">valor inválido</mat-error>
+          <mat-error class="inverso" *ngIf="formulario.get('preco')?.errors?.required">Campo obrigatório</mat-error>
+          <mat-error class="inverso" *ngIf="formulario.get('preco')?.errors?.min">Valor inválido</mat-error>
         </mat-form-field>
 
         <mat-form-field class="inverso">
-          <mat-label>quantidade de pessoas</mat-label>
+          <mat-label>Quantidade de pessoas</mat-label>
           <input type="number" matInput formControlName="quantidadePessoas">
-          <mat-error class="inverso" *ngIf="formulario.get('quantidadePessoas')?.errors?.required">campo obrigatório
+          <mat-error class="inverso" *ngIf="formulario.get('quantidadePessoas')?.errors?.required">Campo obrigatório
           </mat-error>
-          <mat-error class="inverso" *ngIf="formulario.get('quantidadePessoas')?.errors?.min">valor inválido</mat-error>
+          <mat-error class="inverso" *ngIf="formulario.get('quantidadePessoas')?.errors?.min">Valor inválido</mat-error>
         </mat-form-field>
 
         <mat-form-field class="inverso">
-          <mat-label>imagem</mat-label>
+          <mat-label>Imagem</mat-label>
           <input matInput [formControl]="descricaoImagemInput" maxlength="18">
-          <mat-error class="inverso" *ngIf="formulario.get('imagem')?.errors?.required">campo obrigatório</mat-error>
+          <mat-error class="inverso" *ngIf="formulario.get('imagem')?.errors?.required">Campo obrigatório</mat-error>
           <button mat-icon-button matSuffix type="button" (click)="imagemInput.click()">
             <mat-icon>file_upload</mat-icon>
           </button>
@@ -41,17 +43,17 @@
         <input style="display: none" type="file" accept="image/*" #imagemInput (change)="selecionaImagem($event)">
 
         <mat-form-field class="inverso">
-          <mat-label>categorias</mat-label>
+          <mat-label>Categorias</mat-label>
           <mat-select formControlName="categorias" multiple>
             <mat-option *ngFor="let categoria of categorias"
                         [value]="categoria.codigo">{{categoria.nome}}</mat-option>
           </mat-select>
-          <mat-error class="inverso" *ngIf="formulario.get('categorias')?.errors?.required">campo obrigatório</mat-error>
+          <mat-error class="inverso" *ngIf="formulario.get('categorias')?.errors?.required">Campo obrigatório</mat-error>
         </mat-form-field>
       </div>
 
       <button mat-button class="inverso" type="submit" [disabled]="formulario.invalid" (click)="cadastraProduto()">
-        cadastrar
+        Cadastrar
       </button>
     </form>
   </mat-dialog-content>

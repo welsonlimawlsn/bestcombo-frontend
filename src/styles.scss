@@ -60,7 +60,7 @@ body {
   font-weight: 500;
 }
 
-.mat-h3, .mat-subheading-2, .mat-typography h3 {
+.mat-h3, .mat-subheading-2, .mat-typography h3, p {
   font-family: 'Quicksand', "Helvetica Neue", sans-serif;
   color: #FFF;
 }
@@ -103,40 +103,36 @@ body {
   min-width: 200px !important;
 }
 
+/*SM*/
+@media (min-width: 576px) {
+  .card-container > div {
+    width: 50% !important;
+  }
+}
+
+/*MD*/
 @media (min-width: 768px) {
   .left-md-divider {
     border-left: 1px solid #FFF;
   }
 }
 
-/*XS*/
-@media (max-width: 575px) {
-
-}
-
-/*SM*/
-@media (min-width: 576px) {
-
-}
-
-/*MD*/
-@media (min-width: 768px) {
-
-}
-
 /*LG*/
 @media (min-width: 992px) {
-
+  .card-container > div {
+    width: 33.33333333% !important;
+  }
 }
 
 /*XL*/
 @media (min-width: 1200px) {
-
+  .card-container > div {
+    width: 25% !important;
+  }
 }
 
 /*XXL*/
 @media (min-width: 1400px) {
-
 }
 
 app-logo {
@@ -289,4 +285,27 @@ body {
 .mat-dialog-container ::-webkit-scrollbar-thumb {
   background-color: #C92020;
   border-radius: 5px;
+}
+
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.card-container > div {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.mat-card-title {
+  font-family: 'Quicksand', "Helvetica Neue", sans-serif;
+  font-size: 20px;
+}
+
+.mat-card-actions, .mat-card-subtitle, .mat-card-content {
+  font-family: 'Quicksand', "Helvetica Neue", sans-serif;
 }

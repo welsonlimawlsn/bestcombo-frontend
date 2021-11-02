@@ -6,7 +6,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #C92020;
+  background-color: white;
+}
+
+.container {
+  padding: 20px;
 }
 
 .mat-card-subtitle {
@@ -18,4 +22,17 @@
 .image-box .mat-card-image {
   margin: 0;
   width: 100%;
+}
+
+.header-produtos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-produtos * {
+  margin: 0;
+}
+
+p {
+  text-align: center;
 }

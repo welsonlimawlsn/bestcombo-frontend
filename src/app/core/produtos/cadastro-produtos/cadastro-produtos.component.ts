@@ -65,4 +65,8 @@ export class CadastroProdutosComponent implements OnInit {
   private static getArquivo(evento: Event): File | null {
     return ((evento.target as any).files as FileList).item(0);
   }
+
+  fechar() {
+    this.dialogRef.close();
+  }
 }

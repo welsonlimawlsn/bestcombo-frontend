@@ -9,6 +9,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MascaraDirective} from './directives/mascara.directive';
 import {MoedaDirective} from './directives/moeda.directive';
 import {TelefoneDirective} from "./directives/telefone.directive";
+import { HeaderDialogComponent } from './header-dialog/header-dialog.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {TelefoneDirective} from "./directives/telefone.directive";
     ErroDialogComponent,
     MascaraDirective,
     MoedaDirective,
-    TelefoneDirective
+    TelefoneDirective,
+    HeaderDialogComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import {TelefoneDirective} from "./directives/telefone.directive";
     RouterModule,
     MascaraDirective,
     MoedaDirective,
-    TelefoneDirective
+    TelefoneDirective,
+    HeaderDialogComponent
   ]
 })
 export class SharedModule {
