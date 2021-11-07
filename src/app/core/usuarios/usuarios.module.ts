@@ -13,8 +13,7 @@ let routes: Routes = [
 
 @NgModule({
   declarations: [
-    CadastroUsuarioComponent,
-    InicioUsuarioComponent
+    CadastroUsuarioComponent
   ],
   imports: [
     CommonModule,
