@@ -14,7 +14,8 @@ import {switchMap} from "rxjs/operators";
 })
 export class ListaPedidosComponent implements OnInit {
 
-  pedidos!: Pedido[];
+  pedidosPendentes!: Pedido[];
+  pedidosConcluidos!: Pedido[];
 
   isParceiro: boolean = false;
 
@@ -26,7 +27,13 @@ export class ListaPedidosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pedidosService.listaPedidos().subscribe(response => this.pedidos = response.pedidos);
+    this.pedidosService.listaPedidos()
+      .subscribe(response => {
+        this.pedidosPendentes = response.pedidos
+          .filter((p: Pedido) => !['PEDIDO_CONCLUIDO', 'PEDIDO_CANCELADO'].includes(p.situacao));
+        this.pedidosConcluidos = response.pedidos
+          .filter((p: Pedido) => ['PEDIDO_CONCLUIDO', 'PEDIDO_CANCELADO'].includes(p.situacao));
+      });
     this.isParceiro = this.usuarioService.isParceiro();
   }
 

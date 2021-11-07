@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {switchMap} from "rxjs/operators";
 import {EstabelecimentoService} from "../../../services/estabelecimento.service";
 import {ArquivoService} from "../../../services/arquivo.service";
+import {MatDialog} from "@angular/material/dialog";
+import {ErroDialogComponent} from "../../../shared/erro-dialog/erro-dialog.component";
 
 @Component({
   selector: 'app-lista-estabelecimentos-cliente',
@@ -15,14 +17,33 @@ export class ListaEstabelecimentosClienteComponent implements OnInit {
 
   constructor(
     private activateRoute: ActivatedRoute,
-    private estabelecimentoService: EstabelecimentoService
+    private estabelecimentoService: EstabelecimentoService,
+    private dialog: MatDialog,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
     this.activateRoute.queryParams.pipe(
       switchMap(queryParams => this.estabelecimentoService.buscaEstabelecimentoPorTermo(queryParams.termo))
-    ).subscribe(response => this.esbelecimentos = response.lojas);
+    ).subscribe(response => {
+      if (response.lojas && response.lojas.length) {
+        this.esbelecimentos = response.lojas;
+      } else {
+        this.dialog.open(ErroDialogComponent, {
+          data: {
+            erro: {
+              error: {
+                mensagens: [
+                  'Nenhum estabelecimento encontrado com esse termo.'
+                ]
+              }
+            }
+          }
+        }).afterClosed()
+          .subscribe(() => this.router.navigate(['/']))
+      }
+    });
   }
 
   getImageUrl(produto: any) {

@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Pedidos pendentes</h1>
-  <div *ngFor="let pedido of pedidos" class="row">
+  <div *ngFor="let pedido of pedidosPendentes" class="row">
     <div class="col-3" *ngIf="!isParceiro">
       <img [src]="getImageUrl(pedido.loja.imagem)" style="width: 100%">
     </div>
@@ -16,4 +16,19 @@
     </div>
   </div>
   <h1>Pedidos concluídos</h1>
+  <div *ngFor="let pedido of pedidosConcluidos" class="row">
+    <div class="col-3" *ngIf="!isParceiro">
+      <img [src]="getImageUrl(pedido.loja.imagem)" style="width: 100%">
+    </div>
+    <div [class]="isParceiro ? 'col-12' : 'col-9'">
+      <h2>{{pedido.codigo}}</h2>
+      <ul>
+        <li>Valor: {{pedido.valor | currency}}</li>
+        <li>Data realização do pedido: {{pedido.data | date}}</li>
+        <li>Data do evento: {{pedido.dataAgendamento | date}}</li>
+        <li>Situacao: {{pedido.situacao}}</li>
+      </ul>
+      <button mat-button type="button" (click)="visualizaPedido(pedido)">visualizar</button>
+    </div>
+  </div>
 </div>
