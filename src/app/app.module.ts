@@ -8,7 +8,7 @@ import {SharedModule} from "./shared/shared.module";
 import {ServicesModule} from "./services/services.module";
 import "@angular/common/locales/global/pt";
 import {HeaderModule} from "./core/header/header.module";
-import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
+import {PaginaNaoEncontradaComponent} from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 
 
 @NgModule({

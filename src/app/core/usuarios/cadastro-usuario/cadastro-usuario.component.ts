@@ -7,6 +7,9 @@ import {cpfValidator} from "../../../services/validators/cpf-validator";
 import {catchError, distinct, filter, switchMap} from "rxjs/operators";
 import {ClienteService} from "../../../services/cliente.service";
 import {Observable, of} from "rxjs";
+import {Router} from "@angular/router";
+
+const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -15,7 +18,6 @@ import {Observable, of} from "rxjs";
 })
 export class CadastroUsuarioComponent implements OnInit {
 
-
   formulario!: FormGroup;
 
   constructor(
@@ -23,16 +25,23 @@ export class CadastroUsuarioComponent implements OnInit {
     private parceiroService: ParceiroService,
     private usuarioService: UsuarioService,
     private enderecoService: EnderecoService,
-    private clienteSetvice: ClienteService
+    private clienteSetvice: ClienteService,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
+    this.usuarioService.hasUsuarioLogado().subscribe((hasUser) => {
+      if (hasUser) {
+        this.router.navigate(['/'])
+      }
+    });
+
     this.formulario = this.fb.group({
       nome: ['', Validators.required],
       sobrenome: ['', Validators.required],
       cpf: ['', [Validators.required, cpfValidator]],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.pattern(emailPattern)]],
       usuario: ['', Validators.required],
       senha: ['', Validators.required],
       telefone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(11)]],

@@ -1,5 +1,5 @@
 <h1 class="inverso">Ops! ocorreu um erro...</h1>
-<p *ngIf="mensagem">{{mensagem}}</p>
+<p *ngIf="mensagem" class="inverso">{{mensagem}}</p>
 <div *ngIf="!mensagem">
   <p class="inverso" *ngFor="let mensagem of data?.erro?.error?.mensagens">{{mensagem}}</p>
 </div>

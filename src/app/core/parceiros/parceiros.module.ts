@@ -11,16 +11,6 @@ import {ExtratoModule} from "../extrato/extrato.module";
 
 let routes: Routes = [
   {
-    path: '',
-    component: DashboardComponent,
-    canActivate: [AuthGuardService],
-    data: {
-      roles: [
-        'PAPEL_PARCEIRO'
-      ]
-    }
-  },
-  {
     path: 'produtos',
     component: ListaProdutosParceiroComponent,
     canActivate: [AuthGuardService],

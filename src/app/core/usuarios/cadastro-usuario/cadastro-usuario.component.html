@@ -6,7 +6,7 @@
     <div class="col-md-5 col-sm-12 p-3">
       <h2>Você já tem uma conta?</h2>
       <h3>Você pode entrar clicando no botão abaixo!</h3>
-      <button mat-button (click)="fazerLogin('/usuarios')">Entrar</button>
+      <button mat-button (click)="fazerLogin('/')">Entrar</button>
     </div>
     <div class="col-md-7 col-sm-12 left-md-divider p-3 pe-lg-5 ps-lg-5">
       <h2>Você ainda não tem uma conta?</h2>
@@ -51,7 +51,7 @@
             <mat-form-field appearance="fill">
               <mat-label>E-mail</mat-label>
               <input matInput formControlName="email">
-              <mat-error *ngIf="formulario.get('email')?.errors?.email">E-mail inválido</mat-error>
+              <mat-error *ngIf="formulario.get('email')?.errors?.pattern">E-mail inválido</mat-error>
               <mat-error *ngIf="formulario.get('email')?.errors?.required">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
