@@ -50,4 +50,8 @@ export class ListaPedidosComponent implements OnInit {
       }).afterClosed())
     ).subscribe();
   }
+
+  situacaoToString(situacao: string) {
+    return this.pedidosService.situacaoToString(situacao);
+  }
 }

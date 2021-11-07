@@ -4,6 +4,15 @@ import {RequisicaoService} from "./requisicao.service";
 import {environment} from "../../environments/environment";
 import {ListaPedidosResponse} from "./http/responses-dto";
 
+const mapperSituacaoPedido = {
+  'PEDIDO_AGUARDANDO_APROVACAO_PARCEIRO': 'Aguardando a aprovação do parceiro',
+  'PEDIDO_AGUARDANDO_PAGAMENTO_CLIENTE': 'Aguardando a aprovação do pagamento',
+  'PARCEIRO_PREPARANDO_PEDIDO': 'Preparando o pedido',
+  'PEDIDO_ROTA_ENTREGA': 'Em rota de entrega',
+  'PEDIDO_CONCLUIDO': 'Concluído',
+  'PEDIDO_CANCELADO': 'Cancelado',
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -35,6 +44,11 @@ export class PedidosService {
 
   aceitaPedido(codigo: string) {
     return this.alteraSituacaoPedido(codigo, 'PARCEIRO_ACEITA', null);
+  }
+
+  situacaoToString(situacao: string) {
+    // @ts-ignore
+    return mapperSituacaoPedido[situacao];
   }
 
   recusaPedido(codigo: string, motivo: string) {

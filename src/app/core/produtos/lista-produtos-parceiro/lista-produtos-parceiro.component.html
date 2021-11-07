@@ -9,13 +9,11 @@
   </div>
 
   <div class="row">
-    <div class="col mt-4 mb-4" *ngIf="!produtos || produtos.length === 0">
-      <p>
+    <div class="card-container col">
+      <p class="m-4" *ngIf="!produtos || produtos.length === 0">
         Você ainda não possui produtos cadastrados, clique no botão <b>"Cadastrar produto"</b> para cadastrar seu
         primeiro produto.
       </p>
-    </div>
-    <div class="card-container col">
       <div *ngFor="let produto of produtos">
         <mat-card>
           <mat-card-title>{{produto.nome}}</mat-card-title>

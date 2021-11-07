@@ -1,34 +1,48 @@
 <div class="container">
-  <h1>Pedidos pendentes</h1>
-  <div *ngFor="let pedido of pedidosPendentes" class="row">
-    <div class="col-3" *ngIf="!isParceiro">
-      <img [src]="getImageUrl(pedido.loja.imagem)" style="width: 100%">
-    </div>
-    <div [class]="isParceiro ? 'col-12' : 'col-9'">
-      <h2>{{pedido.codigo}}</h2>
-      <ul>
-        <li>Valor: {{pedido.valor | currency}}</li>
-        <li>Data realização do pedido: {{pedido.data | date}}</li>
-        <li>Data do evento: {{pedido.dataAgendamento | date}}</li>
-        <li>Situacao: {{pedido.situacao}}</li>
-      </ul>
-      <button mat-button type="button" (click)="visualizaPedido(pedido)">visualizar</button>
-    </div>
-  </div>
-  <h1>Pedidos concluídos</h1>
-  <div *ngFor="let pedido of pedidosConcluidos" class="row">
-    <div class="col-3" *ngIf="!isParceiro">
-      <img [src]="getImageUrl(pedido.loja.imagem)" style="width: 100%">
-    </div>
-    <div [class]="isParceiro ? 'col-12' : 'col-9'">
-      <h2>{{pedido.codigo}}</h2>
-      <ul>
-        <li>Valor: {{pedido.valor | currency}}</li>
-        <li>Data realização do pedido: {{pedido.data | date}}</li>
-        <li>Data do evento: {{pedido.dataAgendamento | date}}</li>
-        <li>Situacao: {{pedido.situacao}}</li>
-      </ul>
-      <button mat-button type="button" (click)="visualizaPedido(pedido)">visualizar</button>
+  <div class="row">
+    <div class="col">
+      <h1>Pedidos pendentes</h1>
+      <p *ngIf="!(pedidosPendentes && pedidosPendentes.length)">Nenhum pedido pendente</p>
+      <div *ngFor="let pedido of pedidosPendentes" class="pedido">
+        <div class="row">
+          <div class="col-12 col-md-3 imagem" *ngIf="!isParceiro">
+            <img [src]="getImageUrl(pedido.loja.imagem)" style="width: 100%">
+          </div>
+          <div [class]="isParceiro ? 'col-12' : 'col-12 col-md-9'">
+            <h2 class="inverso">{{pedido.codigo}}</h2>
+            <ul>
+              <li><b>Valor:</b> {{pedido.valor | currency}}</li>
+              <li><b>Data realização do pedido:</b> {{pedido.data | date : 'dd/MM/yyyy HH:mm'}}</li>
+              <li><b>Data do evento:</b> {{pedido.dataAgendamento | date : 'dd/MM/yyyy HH:mm'}}</li>
+              <li><b>Situação:</b> {{situacaoToString(pedido.situacao)}}</li>
+            </ul>
+            <div class="botao">
+              <button mat-button color="accent" type="button" (click)="visualizaPedido(pedido)">Visualizar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h1>Pedidos concluídos</h1>
+      <p *ngIf="!(pedidosConcluidos && pedidosConcluidos.length)">Nenhum pedido concluído</p>
+      <div *ngFor="let pedido of pedidosConcluidos" class="pedido">
+        <div class="row">
+          <div class="col-12 col-md-3 imagem" *ngIf="!isParceiro">
+            <img [src]="getImageUrl(pedido.loja.imagem)" style="width: 100%">
+          </div>
+          <div [class]="isParceiro ? 'col-12' : 'col-12 col-md-9'">
+            <h2 class="inverso">{{pedido.codigo}}</h2>
+            <ul>
+              <li><b>Valor:</b> {{pedido.valor | currency}}</li>
+              <li><b>Data realização do pedido:</b> {{pedido.data | date : 'dd/MM/yyyy HH:mm'}}</li>
+              <li><b>Data do evento:</b> {{pedido.dataAgendamento | date : 'dd/MM/yyyy HH:mm'}}</li>
+              <li><b>Situação:</b> {{situacaoToString(pedido.situacao)}}</li>
+            </ul>
+            <div class="botao">
+              <button mat-button color="accent" type="button" (click)="visualizaPedido(pedido)">Visualizar</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

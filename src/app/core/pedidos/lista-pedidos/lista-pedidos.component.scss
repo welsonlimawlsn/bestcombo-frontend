@@ -1,0 +1,39 @@
+.pedido {
+  background-color: #FFFFFF;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.pedido .imagem {
+  height: 210px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.pedido .imagem img {
+  margin: 0;
+  width: 100%;
+}
+
+.pedido ul, .pedido ul li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pedido ul {
+  margin-bottom: 20px;
+}
+
+.botao {
+  position: relative;
+  height: 62px;
+}
+
+.botao button {
+  position: absolute;
+  display: block;
+  right: 0;
+  bottom: 0;
+}
