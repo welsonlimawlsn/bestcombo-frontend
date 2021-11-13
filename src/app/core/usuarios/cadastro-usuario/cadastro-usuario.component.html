@@ -16,14 +16,14 @@
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
               <mat-label>Nome</mat-label>
-              <input matInput formControlName="nome">
+              <input alfabetico matInput formControlName="nome">
               <mat-error *ngIf="formulario.get('nome')?.invalid">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
               <mat-label>Sobrenome</mat-label>
-              <input matInput formControlName="sobrenome">
+              <input alfabetico matInput formControlName="sobrenome">
               <mat-error *ngIf="formulario.get('sobrenome')?.invalid">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
@@ -61,7 +61,7 @@
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
               <mat-label>Usuário</mat-label>
-              <input matInput formControlName="usuario">
+              <input alfanumerico matInput formControlName="usuario">
               <mat-error *ngIf="formulario.get('usuario')?.invalid">Campo brigatório</mat-error>
             </mat-form-field>
           </div>
@@ -70,7 +70,8 @@
             <mat-form-field appearance="fill">
               <mat-label>Senha</mat-label>
               <input matInput type="password" formControlName="senha">
-              <mat-error *ngIf="formulario.get('senha')?.invalid">Campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('senha')?.errors?.required">Campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('senha')?.errors?.minlength">Senha deve ter no minimo 8 caracteres</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -109,13 +110,14 @@
             <mat-form-field appearance="fill">
               <mat-label>Estado</mat-label>
               <input matInput formControlName="estado">
-              <mat-error *ngIf="formulario.get('endereco.estado')?.invalid">Campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('endereco.estado')?.errors?.required">Campo obrigatório</mat-error>
+              <mat-error *ngIf="formulario.get('endereco.estado')?.errors?.pattern">O serviço só está diponivel para o Distrito Federal</mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
               <mat-label>Complemento</mat-label>
-              <input matInput formControlName="complemento">
+              <input alfanumerico matInput formControlName="complemento">
               <mat-error *ngIf="formulario.get('endereco.complemento')?.invalid">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>

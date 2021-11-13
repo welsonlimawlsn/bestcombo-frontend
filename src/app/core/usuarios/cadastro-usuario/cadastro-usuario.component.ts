@@ -8,6 +8,7 @@ import {catchError, distinct, filter, switchMap} from "rxjs/operators";
 import {ClienteService} from "../../../services/cliente.service";
 import {Observable, of} from "rxjs";
 import {Router} from "@angular/router";
+import {AlertaService} from "../../../services/alerta.service";
 
 const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
@@ -26,7 +27,8 @@ export class CadastroUsuarioComponent implements OnInit {
     private usuarioService: UsuarioService,
     private enderecoService: EnderecoService,
     private clienteSetvice: ClienteService,
-    private router: Router
+    private router: Router,
+    private alertaService: AlertaService
   ) {
   }
 
@@ -43,7 +45,7 @@ export class CadastroUsuarioComponent implements OnInit {
       cpf: ['', [Validators.required, cpfValidator]],
       email: ['', [Validators.required, Validators.pattern(emailPattern)]],
       usuario: ['', Validators.required],
-      senha: ['', Validators.required],
+      senha: ['', [Validators.required, Validators.minLength(8)]],
       telefone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(11)]],
       endereco: this.fb.group({
         cep: ['', Validators.required],
@@ -65,6 +67,15 @@ export class CadastroUsuarioComponent implements OnInit {
       filter(cep => cep.length === 8),
       distinct(),
       switchMap((cep) => this.enderecoService.buscaEnderecoPorCEP(cep)),
+      filter((cep: any) => {
+        let isDF = cep.estado === 'DF';
+
+        if (!isDF) {
+          this.alertaService.showAlerta('CEP inválido', 'O bestcombo por enquanto está presente somente no Distrito Federal')
+        }
+
+        return isDF;
+      }),
       catchError(() => this.subscribeCEPControl())
     ) ?? of();
   }
@@ -79,20 +90,33 @@ export class CadastroUsuarioComponent implements OnInit {
   cadastraUsuario() {
     if (this.formulario.valid) {
       if (this.formulario.get('parceiro')?.value) {
-        this.parceiroService.cadastraParceiro(this.formulario.value).subscribe(async response => {
-          await this.fazerLogin('/parceiros/estabelecimento/cadastro');
-        });
+        this.parceiroService.cadastraParceiro(this.formulario.value)
+          .pipe(
+            switchMap(response => this.alertaSucesso())
+          )
+          .subscribe(async response => {
+            await this.fazerLogin('/parceiros/estabelecimento/cadastro');
+          });
       } else {
-        this.clienteSetvice.cadastrarCliente(this.formulario.value).subscribe(async response => {
-          await this.fazerLogin('/');
-        });
+        this.clienteSetvice.cadastrarCliente(this.formulario.value)
+          .pipe(
+            switchMap(response => this.alertaSucesso())
+          )
+          .subscribe(async response => {
+            await this.fazerLogin('/');
+          });
       }
     }
   }
 
+  private alertaSucesso() {
+    return this.alertaService.showAlerta('Sucesso!', 'Cadastro realizado com sucesso').afterClosed();
+  }
+
   async fazerLogin(redirectUri: string) {
     await this.usuarioService.login({
-      redirectUri: window.location.origin + redirectUri
+      redirectUri: window.location.origin + redirectUri,
+      loginHint: this.formulario.get('usuario')?.value
     });
   }
 }

@@ -1,0 +1,2 @@
+export const CARACTERES_ALFABETICOS = 'aáàãâAÁÀÃÂeéêEÉÊiíIÍoóôõOÓÔÕuúUÚbcçdfghjklmnopqrstvwxyzBCÇDFGHJKLMNOPQRSTVWXYZ';
+export const CARACTERES_ALFANUMERICOS = 'aáàãâAÁÀÃÂeéêEÉÊiíIÍoóôõOÓÔÕuúUÚbcçdfghjklmnopqrstvwxyzBCÇDFGHJKLMNOPQRSTVWXYZ0123456789';

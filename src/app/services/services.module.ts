@@ -16,6 +16,7 @@ import {CurrencyPipe} from "@angular/common";
 import {SaldoService} from "./saldo.service";
 import {MovimentosService} from "./movimentos.service";
 import {SolicitacaoSaqueService} from "./solicitacao-saque.service";
+import {AlertaService} from "./alerta.service";
 
 
 function initializeKeycloak(keycloak: KeycloakService) {
@@ -64,6 +65,7 @@ export class ServicesModule {
         SaldoService,
         MovimentosService,
         SolicitacaoSaqueService,
+        AlertaService,
         {
           provide: APP_INITIALIZER,
           useFactory: initializeKeycloak,

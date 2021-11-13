@@ -17,7 +17,7 @@ export class ProdutosService {
 
   novoProduto(produto: any) {
     return this.requestSevice.requisita(
-      this.http.post('http://localhost:9090/produtos', produto)
+      this.http.post(environment.backendUrl + '/produtos', produto)
     )
   }
 

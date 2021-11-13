@@ -4,10 +4,10 @@
 
 export const environment = {
   production: true,
-  ssoUrl: 'https://sso.bestcombo.com.br/auth',
+  ssoUrl: 'https://keycloak-3agqqm23ja-uc.a.run.app/auth',
   ssoRealm: 'bestcombo',
   ssoClientId: 'bestcombo-web',
-  backendUrl: 'http://localhost:9090'
+  backendUrl: 'https://backend-bestcombo-3agqqm23ja-uc.a.run.app'
 };
 
 /*

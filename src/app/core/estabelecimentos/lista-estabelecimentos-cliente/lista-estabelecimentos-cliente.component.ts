@@ -14,6 +14,7 @@ import {ErroDialogComponent} from "../../../shared/erro-dialog/erro-dialog.compo
 export class ListaEstabelecimentosClienteComponent implements OnInit {
 
   esbelecimentos!: any[];
+  termo!: string;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -25,7 +26,10 @@ export class ListaEstabelecimentosClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.activateRoute.queryParams.pipe(
-      switchMap(queryParams => this.estabelecimentoService.buscaEstabelecimentoPorTermo(queryParams.termo))
+      switchMap(queryParams => {
+        this.termo = queryParams.termo;
+        return this.estabelecimentoService.buscaEstabelecimentoPorTermo(queryParams.termo);
+      })
     ).subscribe(response => {
       if (response.lojas && response.lojas.length) {
         this.esbelecimentos = response.lojas;

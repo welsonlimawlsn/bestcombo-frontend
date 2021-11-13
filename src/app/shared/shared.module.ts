@@ -9,7 +9,10 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MascaraDirective} from './directives/mascara.directive';
 import {MoedaDirective} from './directives/moeda.directive';
 import {TelefoneDirective} from "./directives/telefone.directive";
-import { HeaderDialogComponent } from './header-dialog/header-dialog.component';
+import {HeaderDialogComponent} from './header-dialog/header-dialog.component';
+import {AlfanumericoDirective} from './directives/alfanumerico.directive';
+import { AlertaDialogComponent } from './alerta-dialog/alerta-dialog.component';
+import { AlfabeticoDirective } from './directives/alfabetico.directive';
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import { HeaderDialogComponent } from './header-dialog/header-dialog.component';
     MascaraDirective,
     MoedaDirective,
     TelefoneDirective,
-    HeaderDialogComponent
+    HeaderDialogComponent,
+    AlfanumericoDirective,
+    AlertaDialogComponent,
+    AlfabeticoDirective
   ],
   imports: [
     CommonModule,
@@ -39,7 +45,10 @@ import { HeaderDialogComponent } from './header-dialog/header-dialog.component';
     MascaraDirective,
     MoedaDirective,
     TelefoneDirective,
-    HeaderDialogComponent
+    HeaderDialogComponent,
+    AlfanumericoDirective,
+    AlertaDialogComponent,
+    AlfabeticoDirective
   ]
 })
 export class SharedModule {
