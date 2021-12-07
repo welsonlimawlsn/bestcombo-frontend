@@ -35,7 +35,7 @@ $frontend-bestcombo-theme: mat.define-light-theme((
 /* You can add global styles to this file, and also import other style files */
 
 .mat-drawer-container {
-  background-color: #C92020;
+  background-color: #1f1f1f;
 }
 
 html, body {
@@ -155,6 +155,7 @@ app-logo {
 
 .mat-form-field {
   font-family: 'Quicksand', "Helvetica Neue", sans-serif;
+  font-weight: 600;
 }
 
 .mat-form-field.inverso {
@@ -210,12 +211,16 @@ app-logo {
 }
 
 .mat-drawer {
-  background-color: #b41d1d;
+  background-color: #FFFFFF;
 }
 
 .mat-list-base .mat-list-item {
   color: #FFFFFF;
   font-family: 'Quicksand', "Helvetica Neue", sans-serif;
+}
+
+.mat-list-base .mat-list-item.inverso {
+  color: #585858;
 }
 
 .container {
@@ -227,6 +232,10 @@ app-logo {
 .mat-button.mat-accent, .mat-icon-button.mat-accent, .mat-stroked-button.mat-accent {
   color: #FFFFFF;
   background-color: #C92020;
+}
+
+.mat-form-field.mat-form-field-invalid .mat-form-field-label.mat-accent, .mat-form-field.mat-form-field-invalid .mat-form-field-label .mat-form-field-required-marker {
+  color: #C92020;
 }
 
 .mat-button.inverso {
@@ -250,7 +259,7 @@ h1.inverso, h2.inverso {
 
 
 body {
-  background-color: #C92020;
+  background-color: #1f1f1f;
 }
 
 
@@ -337,4 +346,16 @@ p.inverso {
   align-items: center;
   justify-content: center;
   background-color: white;
+}
+
+.mat-calendar-controls .mat-button {
+  line-height: 38px !important;
+}
+
+.mat-calendar-body-selected {
+  background-color: rgb(180, 29, 29);
+}
+
+.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical), .cdk-keyboard-focused .mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical), .cdk-program-focused .mat-calendar-body-active > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+  background-color: rgba(180, 29, 29, .3);
 }

@@ -27,6 +27,12 @@ export class EstabelecimentoService {
     );
   }
 
+  listaUltimosEstabecimentos() {
+    return this.requisicaoService.requisita(
+      this.http.get<BuscaLojasResponse>(`${environment.backendUrl}/publico/lojas/ultimas`)
+    );
+  }
+
   buscaEstabelecimentoParceiroLogado(redirect = true) {
     if (this.estabelecimento) {
       return new Observable<any>(subscriber => {

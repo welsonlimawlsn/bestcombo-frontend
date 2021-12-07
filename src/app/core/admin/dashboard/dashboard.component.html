@@ -1,18 +1,32 @@
 <div class="container-fluid">
-  <div class="row" *ngIf="saldos">
-    <div class="col">
-      <h2>Valor recebido</h2>
-      <p>{{saldos.valorDisponivel| currency}}</p>
+  <div class="navegador-mes">
+    <div><button mat-icon-button type="button" (click)="retrocedeMes()"><mat-icon>navigate_before</mat-icon></button></div>
+    <div>{{data | date : 'MMMM \'de\' yyyy'}}</div>
+    <div><button mat-icon-button type="button" (click)="avancaMes()"><mat-icon>navigate_next</mat-icon></button></div>
+  </div>
+  <div class="row saldos" *ngIf="saldos">
+    <div class="col-12 col-sm-6 col-lg-3">
+      <h2>Faturamento Bruto</h2>
+      <p>{{saldos.saldoBruto | currency}}</p>
     </div>
-    <div class="col">
-      <h2>Valor a receber nos proximos 30 dias</h2>
-      <p>{{saldos.valorAReceber| currency}}</p>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <h2>Faturamento Líquido sem ISS</h2>
+      <p>{{saldos.saldoLiquidoSemImpostos | currency}}</p>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <h2>Valor ISS Previsto (2%)</h2>
+      <p>{{saldos.imposto | currency}}</p>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-3">
+      <h2>Faturamento Líquido com ISS</h2>
+      <p>{{saldos.saldoLiquidoComImpostos | currency}}</p>
     </div>
   </div>
   <div class="row">
-    <div class="col">
+    <div class="col-12 col-lg-6">
       <h2>Extrato 7 últimos dias</h2>
-      <table style="width: 100%;" mat-table [dataSource]="movimentos">
+      <p *ngIf="!(movimentos && movimentos.length)">Não houve transações nos últimos dias</p>
+      <table *ngIf="movimentos && movimentos.length" style="width: 100%;" mat-table [dataSource]="movimentos">
 
         <ng-container matColumnDef="codigo">
           <th mat-header-cell *matHeaderCellDef>Código</th>
@@ -48,11 +62,12 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumnsExtrato;"></tr>
       </table>
     </div>
-    <div class="col">
+    <div class="col-12 col-lg-6">
       <h2>
         Solicitações de Saque
       </h2>
-      <table style="width: 100%;" mat-table [dataSource]="solicitacoes">
+      <p *ngIf="!(solicitacoes && solicitacoes.length)">Sem solicitações pendentes</p>
+      <table *ngIf="solicitacoes && solicitacoes.length" style="width: 100%;" mat-table [dataSource]="solicitacoes">
 
         <ng-container matColumnDef="codigo">
           <th mat-header-cell *matHeaderCellDef>Código</th>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {KeycloakProfile} from "keycloak-js";
 import {UsuarioService} from "./services/usuario.service";
+import {MatDrawer} from "@angular/material/sidenav";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent implements OnInit {
 
   perfil!: KeycloakProfile;
   menu = [
-    {texto: 'Inicio', link: '/admin/dashboard', roles: ['PAPEL_ADMINISTRADOR']},
+    {texto: 'Dashboard', link: '/admin/dashboard', roles: ['PAPEL_ADMINISTRADOR']},
     {texto: 'Produtos', link: '/parceiros/produtos', roles: ['PAPEL_PARCEIRO']},
     {texto: 'Pedidos', link: '/parceiros/pedidos', roles: ['PAPEL_PARCEIRO']},
     {texto: 'Extrato', link: '/parceiros/extrato', roles: ['PAPEL_PARCEIRO']},
@@ -37,5 +38,15 @@ export class AppComponent implements OnInit {
             .subscribe(usuario => this.perfil = usuario);
         }
       });
+  }
+
+  isSmallScreen() {
+    return screen.width < 768;
+  }
+
+  async resetToggle(drawer: MatDrawer) {
+    if (this.isSmallScreen()) {
+      await drawer.toggle();
+    }
   }
 }

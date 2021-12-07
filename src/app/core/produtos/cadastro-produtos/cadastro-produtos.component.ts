@@ -5,6 +5,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Categoria} from "../../../services/http/responses-dto";
 import {ArquivoService} from "../../../services/arquivo.service";
 import {switchMap} from "rxjs/operators";
+import {AlertaService} from "../../../services/alerta.service";
 
 @Component({
   selector: 'app-cadastro-produtos',
@@ -23,7 +24,8 @@ export class CadastroProdutosComponent implements OnInit {
     private produtoService: ProdutosService,
     private dialogRef: MatDialogRef<CadastroProdutosComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private arquivoService: ArquivoService
+    private arquivoService: ArquivoService,
+    private alertaService: AlertaService
   ) {
   }
 
@@ -48,8 +50,12 @@ export class CadastroProdutosComponent implements OnInit {
           this.formulario.get('imagem')?.setValue(response.nomeArquivo);
 
           return this.produtoService.novoProduto(this.formulario.value);
-        })
-      ).subscribe(produto => this.dialogRef.close(produto));
+        }),
+      ).subscribe(produto => {
+        this.alertaService.showAlerta('Sucesso', 'Cadastro realizado com sucesso!').afterClosed().subscribe(
+          () => this.dialogRef.close(produto)
+        )
+      });
     }
   }
 

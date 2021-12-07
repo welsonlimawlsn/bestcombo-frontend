@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {AlertaDialogComponent} from "../shared/alerta-dialog/alerta-dialog.component";
+import {ConfirmacaoDialogComponent} from "../shared/confirmacao-dialog/confirmacao-dialog.component";
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,14 @@ export class AlertaService {
       data: {
         titulo: titulo,
         mensagem: mensagem
+      }
+    });
+  }
+
+  pedeConfirmacao(mensangem: string) {
+    return this.dialog.open(ConfirmacaoDialogComponent, {
+      data: {
+        mensagem: mensangem
       }
     });
   }

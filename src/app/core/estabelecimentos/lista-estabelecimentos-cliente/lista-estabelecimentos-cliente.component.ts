@@ -5,6 +5,7 @@ import {EstabelecimentoService} from "../../../services/estabelecimento.service"
 import {ArquivoService} from "../../../services/arquivo.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ErroDialogComponent} from "../../../shared/erro-dialog/erro-dialog.component";
+import {ProdutosService} from "../../../services/produtos.service";
 
 @Component({
   selector: 'app-lista-estabelecimentos-cliente',
@@ -13,12 +14,13 @@ import {ErroDialogComponent} from "../../../shared/erro-dialog/erro-dialog.compo
 })
 export class ListaEstabelecimentosClienteComponent implements OnInit {
 
-  esbelecimentos!: any[];
+  produtos!: any[];
   termo!: string;
 
   constructor(
     private activateRoute: ActivatedRoute,
     private estabelecimentoService: EstabelecimentoService,
+    private produtoService: ProdutosService,
     private dialog: MatDialog,
     private router: Router
   ) {
@@ -28,18 +30,19 @@ export class ListaEstabelecimentosClienteComponent implements OnInit {
     this.activateRoute.queryParams.pipe(
       switchMap(queryParams => {
         this.termo = queryParams.termo;
-        return this.estabelecimentoService.buscaEstabelecimentoPorTermo(queryParams.termo);
+        return this.produtoService.buscaProdutoPorTermo(queryParams.termo);
       })
     ).subscribe(response => {
-      if (response.lojas && response.lojas.length) {
-        this.esbelecimentos = response.lojas;
+      console.log(response);
+      if (response.produtos && response.produtos.length) {
+        this.produtos = response.produtos;
       } else {
         this.dialog.open(ErroDialogComponent, {
           data: {
             erro: {
               error: {
                 mensagens: [
-                  'Nenhum estabelecimento encontrado com esse termo.'
+                  'Nenhum produto ou serviço encontrado com esse termo.'
                 ]
               }
             }

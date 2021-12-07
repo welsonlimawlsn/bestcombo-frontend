@@ -35,7 +35,7 @@ export class AuthGuardService extends KeycloakAuthGuard {
     let hasPermission = roles.every(role => this.roles.includes(role));
 
     if (!hasPermission) {
-      await this.router.navigate(['pagina-nao-encontrada']);
+      await this.router.navigate(['sem-permissao']);
       return false;
     }
 

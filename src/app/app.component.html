@@ -1,9 +1,10 @@
 <app-loading></app-loading>
 <mat-drawer-container class="drawer">
-  <mat-drawer class="menu" #drawer mode="over">
-    <h1 *ngIf="perfil">{{perfil.firstName + ' ' + perfil.lastName}}</h1>
+  <mat-drawer class="menu" #drawer [mode]="isSmallScreen() ? 'over' : 'side'"
+              [opened]="isAuthenticated && !isSmallScreen()">
+    <h1 *ngIf="perfil" class="inverso">{{perfil.firstName + ' ' + perfil.lastName}}</h1>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="m.link" *ngFor="let m of getMenus()" (click)="drawer.toggle()">
+      <a mat-list-item class="inverso" [routerLink]="m.link" *ngFor="let m of getMenus()" (click)="resetToggle(drawer)">
         <div mat-line>{{m.texto}}</div>
       </a>
     </mat-nav-list>

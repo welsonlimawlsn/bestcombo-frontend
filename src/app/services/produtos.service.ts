@@ -34,9 +34,21 @@ export class ProdutosService {
     );
   }
 
+  buscaProdutoPorTermo(termo: string) {
+    return this.requestSevice.requisita(
+      this.http.get<any>(`${environment.backendUrl}/publico/produtos/busca`, {params: {termo: termo}})
+    );
+  }
+
   excluiProduto(codigo: string) {
     return this.requestSevice.requisita(
       this.http.delete(`${environment.backendUrl}/produtos/${codigo}`)
     )
+  }
+
+  listaUltimosProdutos() {
+    return this.requestSevice.requisita(
+      this.http.get<any>(`${environment.backendUrl}/publico/produtos/ultimos-cadastrados`)
+    );
   }
 }

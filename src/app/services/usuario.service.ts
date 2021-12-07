@@ -61,4 +61,8 @@ export class UsuarioService {
   async login(param: KeycloakLoginOptions) {
     await this.keycloakService.login(param);
   }
+
+  isAdmin() {
+    return this.isUserInRole('PAPEL_ADMINISTRADOR');
+  }
 }

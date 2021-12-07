@@ -25,4 +25,15 @@ export class SaldoService {
       this.http.get<any>(`${environment.backendUrl}/saldos/bestcombo`)
     );
   }
+
+  consultaSaldoMensal(mes: number, ano: number) {
+    return this.requisaoService.requisita(
+      this.http.get<any>(`${environment.backendUrl}/saldos/mensal`, {
+        params: {
+          mes: mes,
+          ano: ano
+        }
+      })
+    );
+  }
 }

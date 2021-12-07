@@ -5,6 +5,8 @@ import {ArquivoService} from "../../../services/arquivo.service";
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {PedidosService} from "../../../services/pedidos.service";
 import {Router} from "@angular/router";
+import {switchMap} from "rxjs/operators";
+import {AlertaService} from "../../../services/alerta.service";
 
 @Component({
   selector: 'app-novo-pedido',
@@ -22,11 +24,17 @@ export class NovoPedidoComponent implements OnInit {
     private carrinhoService: CarrinhoService,
     private fb: FormBuilder,
     private pedidosService: PedidosService,
-    private router: Router
+    private router: Router,
+    private alertaService: AlertaService
   ) {
   }
 
   ngOnInit(): void {
+    let date = new Date();
+    date.setDate(new Date().getDate() + 1);
+
+    this.dataMinima = date;
+
     this.produto = this.carrinhoService.getProduto();
 
     this.formulario = this.fb.group({
@@ -35,10 +43,10 @@ export class NovoPedidoComponent implements OnInit {
       quantidade: ['1', [Validators.required, Validators.min(1)]],
       observacao: [''],
       cartao: this.fb.group({
-        numero: ['', Validators.required],
+        numero: ['', [Validators.required, Validators.minLength(16)]],
         nome: ['', Validators.required],
         dataVencimento: ['', [Validators.required, NovoPedidoComponent.validaVencimentoCartao]],
-        cvv: ['', Validators.required],
+        cvv: ['', [Validators.required, Validators.minLength(3)]],
       })
     }, {
       validators: NovoPedidoComponent.validaDataAgendamento
@@ -105,7 +113,6 @@ export class NovoPedidoComponent implements OnInit {
 
       let b = novaData <= new Date();
 
-      console.log(b);
       return b ? {dataHoraAgendamentoInvalido: true} : null;
     }
     return null;
@@ -135,6 +142,9 @@ export class NovoPedidoComponent implements OnInit {
         ]
       }
       this.pedidosService.novoPedido(requisicao)
+        .pipe(
+          switchMap(requisicao => this.alertaService.showAlerta('Sucesso!', 'O pedido foi efetuado e pode ser visualizado na tela de acompanhamento.').afterClosed())
+        )
         .subscribe(() => this.router.navigate(['/clientes', 'pedidos']));
     }
   }

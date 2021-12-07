@@ -6,7 +6,7 @@
     <div class="col-md-5 col-sm-12 p-3">
       <h2>Você já tem uma conta?</h2>
       <h3>Você pode entrar clicando no botão abaixo!</h3>
-      <button mat-button (click)="fazerLogin('/')">Entrar</button>
+      <button mat-button (click)="fazerLogin('/usuarios/inicio')">Entrar</button>
     </div>
     <div class="col-md-7 col-sm-12 left-md-divider p-3 pe-lg-5 ps-lg-5">
       <h2>Você ainda não tem uma conta?</h2>
@@ -16,14 +16,14 @@
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
               <mat-label>Nome</mat-label>
-              <input alfabetico matInput formControlName="nome">
+              <input alfabetico matInput formControlName="nome" required>
               <mat-error *ngIf="formulario.get('nome')?.invalid">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
               <mat-label>Sobrenome</mat-label>
-              <input alfabetico matInput formControlName="sobrenome">
+              <input alfabetico matInput formControlName="sobrenome" required>
               <mat-error *ngIf="formulario.get('sobrenome')?.invalid">Campo obrigatório</mat-error>
             </mat-form-field>
           </div>
@@ -32,7 +32,7 @@
         <div>
           <mat-form-field appearance="fill">
             <mat-label>CPF</mat-label>
-            <input matInput mascara="###.###.###-##" formControlName="cpf" maxlength="14">
+            <input matInput mascara="###.###.###-##" formControlName="cpf" maxlength="14" required>
             <mat-error *ngIf="formulario.get('cpf')?.errors?.cpfInvalido">CPF inválido</mat-error>
             <mat-error *ngIf="formulario.get('cpf')?.errors?.required">Campo obrigatório</mat-error>
           </mat-form-field>
@@ -42,7 +42,7 @@
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
               <mat-label>Telefone</mat-label>
-              <input telefone matInput formControlName="telefone">
+              <input telefone matInput formControlName="telefone" placeholder="Ex.: (99) 99999-9999" required>
               <mat-error *ngIf="formulario.get('telefone')?.errors?.required">Campo obrigatório</mat-error>
               <mat-error *ngIf="formulario.get('telefone')?.errors?.minlength">Telefone inválido</mat-error>
             </mat-form-field>
@@ -50,7 +50,7 @@
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
               <mat-label>E-mail</mat-label>
-              <input matInput formControlName="email">
+              <input matInput formControlName="email" required>
               <mat-error *ngIf="formulario.get('email')?.errors?.pattern">E-mail inválido</mat-error>
               <mat-error *ngIf="formulario.get('email')?.errors?.required">Campo obrigatório</mat-error>
             </mat-form-field>
@@ -61,7 +61,7 @@
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
               <mat-label>Usuário</mat-label>
-              <input alfanumerico matInput formControlName="usuario">
+              <input alfanumerico matInput formControlName="usuario" required>
               <mat-error *ngIf="formulario.get('usuario')?.invalid">Campo brigatório</mat-error>
             </mat-form-field>
           </div>
@@ -69,66 +69,14 @@
           <div class="col-md-12 col-lg-6">
             <mat-form-field appearance="fill">
               <mat-label>Senha</mat-label>
-              <input matInput type="password" formControlName="senha">
+              <input matInput type="password" formControlName="senha" placeholder="Mínimo 8 caracteres" required>
               <mat-error *ngIf="formulario.get('senha')?.errors?.required">Campo obrigatório</mat-error>
               <mat-error *ngIf="formulario.get('senha')?.errors?.minlength">Senha deve ter no minimo 8 caracteres</mat-error>
             </mat-form-field>
           </div>
         </div>
 
-        <div formGroupName="endereco" class="row">
-          <h3>Informe o endereço de sua residência</h3>
-          <div class="col-md-12 col-lg-6">
-            <mat-form-field appearance="fill">
-              <mat-label>CEP</mat-label>
-              <input mascara="#####-###" matInput formControlName="cep">
-              <mat-error *ngIf="formulario.get('endereco.cep')?.invalid">Campo obrigatório</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-12">
-            <mat-form-field appearance="fill">
-              <mat-label>Rua</mat-label>
-              <input matInput formControlName="rua">
-              <mat-error *ngIf="formulario.get('endereco.rua')?.invalid">Campo obrigatório</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-12">
-            <mat-form-field appearance="fill">
-              <mat-label>Bairro</mat-label>
-              <input matInput formControlName="bairro">
-              <mat-error *ngIf="formulario.get('endereco.bairro')?.invalid">Campo obrigatório</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-md-12 col-lg-6">
-            <mat-form-field appearance="fill">
-              <mat-label>Cidade</mat-label>
-              <input matInput formControlName="cidade">
-              <mat-error *ngIf="formulario.get('endereco.cidade')?.invalid">Campo obrigatório</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-md-12 col-lg-6">
-            <mat-form-field appearance="fill">
-              <mat-label>Estado</mat-label>
-              <input matInput formControlName="estado">
-              <mat-error *ngIf="formulario.get('endereco.estado')?.errors?.required">Campo obrigatório</mat-error>
-              <mat-error *ngIf="formulario.get('endereco.estado')?.errors?.pattern">O serviço só está diponivel para o Distrito Federal</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-md-12 col-lg-6">
-            <mat-form-field appearance="fill">
-              <mat-label>Complemento</mat-label>
-              <input alfanumerico matInput formControlName="complemento">
-              <mat-error *ngIf="formulario.get('endereco.complemento')?.invalid">Campo obrigatório</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-md-12 col-lg-6">
-            <mat-form-field appearance="fill">
-              <mat-label>Número</mat-label>
-              <input matInput formControlName="numero">
-              <mat-error *ngIf="formulario.get('endereco.numero')?.invalid">Campo obrigatório</mat-error>
-            </mat-form-field>
-          </div>
-        </div>
+        <app-endereco [formulario]="formulario.get('endereco')"></app-endereco>
 
         <div class="col-12">
           <mat-checkbox formControlName="parceiro">Cadastrar como parceiro</mat-checkbox>

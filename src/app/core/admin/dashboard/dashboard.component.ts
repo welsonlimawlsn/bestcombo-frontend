@@ -17,6 +17,8 @@ export class DashboardComponent implements OnInit {
   movimentos!: any[];
   saldos!: any;
 
+  data!: Date;
+
   displayedColumnsExtrato: string[] = ['dataHora', 'descricao', 'dataHoraEfetivacao', 'valor']
 
 
@@ -31,22 +33,44 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.configuraData();
     let ultimaSemana = new Date();
     ultimaSemana.setHours(0, 0, 0, 0);
     ultimaSemana.setDate(ultimaSemana.getDate() - 7);
 
     forkJoin({
       solicitacoesSaque: this.solicitacaoSaqueService.consultaSolicitacoesPendentes(),
-      saldos: this.saldoService.consultaSaldosBestcombo(),
-      movimentos: this.movimentoService.consultaMovimentosBestCombo(ultimaSemana)
+      movimentos: this.movimentoService.consultaMovimentosBestCombo(ultimaSemana),
+      saldosMensal: this.consultaSaldoMensal()
     }).subscribe(responses => {
       this.solicitacoes = responses.solicitacoesSaque.solicitacoesSaque;
-      this.saldos = responses.saldos;
+      this.saldos = responses.saldosMensal;
       this.movimentos = responses.movimentos.movimentos;
     });
   }
 
+  private consultaSaldoMensal() {
+    return this.saldoService.consultaSaldoMensal(this.data.getMonth() + 1, this.data.getFullYear());
+  }
+
   visualizar(element: any) {
     this.dialog.open(VisualizaSolicitacaoSaqueComponent, {data: element})
+  }
+
+  private configuraData() {
+    this.data = new Date();
+    this.data.setDate(1);
+  }
+
+  retrocedeMes() {
+    this.data.setMonth(this.data.getMonth() - 1);
+    this.data = new Date(this.data);
+    this.consultaSaldoMensal().subscribe(saldos => this.saldos = saldos);
+  }
+
+  avancaMes() {
+    this.data.setMonth(this.data.getMonth() + 1);
+    this.data = new Date(this.data);
+    this.consultaSaldoMensal().subscribe(saldos => this.saldos = saldos);
   }
 }

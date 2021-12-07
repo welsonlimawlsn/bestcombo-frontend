@@ -28,7 +28,7 @@ export class HeaderDeslogadoComponent implements OnInit {
   }
 
   async login() {
-    await this.usuarioService.login({redirectUri: window.location.origin});
+    await this.usuarioService.login({redirectUri: window.location.origin + '/usuarios/inicio'});
   }
 
 }

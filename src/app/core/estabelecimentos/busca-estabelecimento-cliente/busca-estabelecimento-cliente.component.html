@@ -2,13 +2,10 @@
 
 <div class="container">
   <div class="row">
-    <p>Faça a busca de parceiros</p>
-  </div>
-  <div class="row">
     <div class="col-12">
       <form [formGroup]="formulario">
         <mat-form-field appearance="fill">
-          <mat-label>termo</mat-label>
+          <mat-label>Buscar um produto ou serviço</mat-label>
           <input matInput formControlName="pesquisa">
           <button mat-icon-button matSuffix type="submit" [disabled]="formulario.invalid" (click)="buscaLojas()">
             <mat-icon>search</mat-icon>
@@ -17,5 +14,20 @@
       </form>
     </div>
   </div>
-
+  <div class="row">
+    <h2>Produtos e serviços recentes</h2>
+    <div class="card-container">
+      <div *ngFor="let produto of produtos">
+        <a [routerLink]="['/produtos', produto.codigo]">
+          <mat-card>
+            <mat-card-title>{{produto.nome}}</mat-card-title>
+            <div class="image-box">
+              <img mat-card-image [src]="getImageUrl(produto)" [alt]="'Foto de ' + produto.nome">
+            </div>
+            <mat-card-content>{{produto.descricao}}</mat-card-content>
+          </mat-card>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>

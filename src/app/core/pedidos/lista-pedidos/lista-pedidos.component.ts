@@ -27,6 +27,11 @@ export class ListaPedidosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.buscaPedidos();
+    this.isParceiro = this.usuarioService.isParceiro();
+  }
+
+  private buscaPedidos() {
     this.pedidosService.listaPedidos()
       .subscribe(response => {
         this.pedidosPendentes = response.pedidos
@@ -34,7 +39,6 @@ export class ListaPedidosComponent implements OnInit {
         this.pedidosConcluidos = response.pedidos
           .filter((p: Pedido) => ['PEDIDO_CONCLUIDO', 'PEDIDO_CANCELADO'].includes(p.situacao));
       });
-    this.isParceiro = this.usuarioService.isParceiro();
   }
 
   getImageUrl(imagem: string) {
@@ -48,7 +52,11 @@ export class ListaPedidosComponent implements OnInit {
           pedido: p
         }
       }).afterClosed())
-    ).subscribe();
+    ).subscribe(result => {
+      if (result) {
+        this.buscaPedidos();
+      }
+    });
   }
 
   situacaoToString(situacao: string) {

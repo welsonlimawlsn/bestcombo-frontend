@@ -2,12 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {CadastroProdutosComponent} from "../cadastro-produtos/cadastro-produtos.component";
 import {EstabelecimentoService} from "../../../services/estabelecimento.service";
-import {switchMap} from "rxjs/operators";
+import {filter, switchMap} from "rxjs/operators";
 import {ProdutosService} from "../../../services/produtos.service";
 import {forkJoin} from "rxjs";
 import {CategoriaService} from "../../../services/categoria.service";
 import {ArquivoService} from "../../../services/arquivo.service";
 import {Produto} from "../../../services/http/responses-dto";
+import {AlertaService} from "../../../services/alerta.service";
 
 @Component({
   selector: 'app-lista-produtos-parceiro',
@@ -18,10 +19,12 @@ export class ListaProdutosParceiroComponent implements OnInit {
 
   produtos!: Produto[];
 
-  constructor(private dialog: MatDialog,
-              private estabelecimentoService: EstabelecimentoService,
-              private produtoService: ProdutosService,
-              private categoriaService: CategoriaService
+  constructor(
+    private dialog: MatDialog,
+    private estabelecimentoService: EstabelecimentoService,
+    private produtoService: ProdutosService,
+    private categoriaService: CategoriaService,
+    private alertaService: AlertaService
   ) {
   }
 
@@ -57,6 +60,9 @@ export class ListaProdutosParceiroComponent implements OnInit {
   }
 
   exclui(produto: any) {
-    this.produtoService.excluiProduto(produto.codigo).subscribe(() => this.atualizaProdutos());
+    this.alertaService.pedeConfirmacao('Deseja excluir este produto?').afterClosed().pipe(
+      filter(result => result),
+      switchMap(result => this.produtoService.excluiProduto(produto.codigo))
+    ).subscribe(() => this.atualizaProdutos());
   }
 }

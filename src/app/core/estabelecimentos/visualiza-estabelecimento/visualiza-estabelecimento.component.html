@@ -4,11 +4,13 @@
     <h1>{{estabelecimento.nome}}</h1>
     <img class="imagem-estabelecimento" [src]="getImageUrl(estabelecimento.imagem)"
          [alt]="'Foto do estabelecimento ' + estabelecimento.nome">
+    <p>{{estabelecimento.descricao}}</p>
   </div>
   <div class="row">
     <div class="col-12 col-md-6">
       <h2>Produtos</h2>
       <div class="card-container-2">
+        <p *ngIf="!produtos || !produtos.length">Esse parceiro não possui produtos</p>
         <div *ngFor="let produto of produtos">
           <a [routerLink]="['/produtos', produto.codigo]">
             <mat-card>
@@ -22,10 +24,11 @@
         </div>
       </div>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-6 left-md-divider">
       <h2>Serviços</h2>
       <div class="card-container-2">
-        <div class="flex-item" *ngFor="let servico of servicos">
+        <p *ngIf="!servicos || !servicos.length">Esse parceiro não possui serviços</p>
+        <div *ngFor="let servico of servicos">
           <a [routerLink]="['/produtos', servico.codigo]">
             <mat-card>
               <mat-card-title>{{servico.nome}}</mat-card-title>

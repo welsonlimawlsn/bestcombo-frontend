@@ -1,15 +1,15 @@
-<header *ngIf="!perfil">
+<header *ngIf="!isAuthenticated">
   <mat-toolbar>
     <mat-toolbar-row>
       <span class="espaco">
       <span>
-        <app-logo size="16px"></app-logo>
+        <app-logo size="32px"></app-logo>
       </span>
     </span>
     </mat-toolbar-row>
     <mat-toolbar-row class="menu">
-      <a class="item-menu" [routerLink]="['/usuarios', 'cadastro']">crie uma conta</a>
-      <a class="item-menu" href="#" (click)="login()">entre</a>
+      <a class="item-menu" [routerLink]="['/usuarios', 'cadastro']">Criar conta</a>
+      <a style="cursor: pointer" class="item-menu" (click)="login()">Fazer login</a>
     </mat-toolbar-row>
   </mat-toolbar>
 </header>

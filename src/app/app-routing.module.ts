@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BuscaEstabelecimentoClienteComponent} from "./core/estabelecimentos/busca-estabelecimento-cliente/busca-estabelecimento-cliente.component";
 import {PaginaNaoEncontradaComponent} from "./pagina-nao-encontrada/pagina-nao-encontrada.component";
+import {SemPermissaoComponent} from "./sem-permissao/sem-permissao.component";
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'pagina-nao-encontrada',
     component: PaginaNaoEncontradaComponent
+  },
+  {
+    path: 'sem-permissao',
+    component: SemPermissaoComponent
   },
   {
     path: '**',

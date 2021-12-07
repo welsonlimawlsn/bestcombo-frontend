@@ -1,0 +1,53 @@
+<div *ngIf="formulario" [formGroup]="getFormulario()" class="row">
+  <h3>Informe o endereço de sua residência</h3>
+  <div class="col-md-12 col-lg-6">
+    <mat-form-field appearance="fill">
+      <mat-label>CEP</mat-label>
+      <input mascara="#####-###" matInput formControlName="cep" required>
+      <mat-error *ngIf="formulario.get('cep')?.invalid">Campo obrigatório</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="col-12">
+    <mat-form-field appearance="fill">
+      <mat-label>Rua</mat-label>
+      <input matInput formControlName="rua">
+      <mat-error *ngIf="formulario.get('rua')?.invalid">Campo obrigatório</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="col-12">
+    <mat-form-field appearance="fill">
+      <mat-label>Bairro</mat-label>
+      <input matInput formControlName="bairro">
+      <mat-error *ngIf="formulario.get('bairro')?.invalid">Campo obrigatório</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="col-md-12 col-lg-6">
+    <mat-form-field appearance="fill">
+      <mat-label>Cidade</mat-label>
+      <input matInput formControlName="cidade">
+      <mat-error *ngIf="formulario.get('cidade')?.invalid">Campo obrigatório</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="col-md-12 col-lg-6">
+    <mat-form-field appearance="fill">
+      <mat-label>Estado</mat-label>
+      <input matInput formControlName="estado">
+      <mat-error *ngIf="formulario.get('estado')?.errors?.required">Campo obrigatório</mat-error>
+      <mat-error *ngIf="formulario.get('estado')?.errors?.pattern">O serviço só está diponivel para o Distrito Federal</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="col-md-12 col-lg-6">
+    <mat-form-field appearance="fill">
+      <mat-label>Complemento</mat-label>
+      <input alfanumerico matInput formControlName="complemento">
+      <mat-error *ngIf="formulario.get('complemento')?.invalid">Campo obrigatório</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="col-md-12 col-lg-6">
+    <mat-form-field appearance="fill">
+      <mat-label>Número</mat-label>
+      <input matInput formControlName="numero" required>
+      <mat-error *ngIf="formulario.get('numero')?.invalid">Campo obrigatório</mat-error>
+    </mat-form-field>
+  </div>
+</div>

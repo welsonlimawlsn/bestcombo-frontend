@@ -13,6 +13,8 @@ import {HeaderDialogComponent} from './header-dialog/header-dialog.component';
 import {AlfanumericoDirective} from './directives/alfanumerico.directive';
 import { AlertaDialogComponent } from './alerta-dialog/alerta-dialog.component';
 import { AlfabeticoDirective } from './directives/alfabetico.directive';
+import { ConfirmacaoDialogComponent } from './confirmacao-dialog/confirmacao-dialog.component';
+import { EnderecoComponent } from './endereco/endereco.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import { AlfabeticoDirective } from './directives/alfabetico.directive';
     HeaderDialogComponent,
     AlfanumericoDirective,
     AlertaDialogComponent,
-    AlfabeticoDirective
+    AlfabeticoDirective,
+    ConfirmacaoDialogComponent,
+    EnderecoComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +52,8 @@ import { AlfabeticoDirective } from './directives/alfabetico.directive';
     HeaderDialogComponent,
     AlfanumericoDirective,
     AlertaDialogComponent,
-    AlfabeticoDirective
+    AlfabeticoDirective,
+    EnderecoComponent
   ]
 })
 export class SharedModule {

@@ -9,12 +9,14 @@ import {ServicesModule} from "./services/services.module";
 import "@angular/common/locales/global/pt";
 import {HeaderModule} from "./core/header/header.module";
 import {PaginaNaoEncontradaComponent} from './pagina-nao-encontrada/pagina-nao-encontrada.component';
+import { SemPermissaoComponent } from './sem-permissao/sem-permissao.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PaginaNaoEncontradaComponent
+    PaginaNaoEncontradaComponent,
+    SemPermissaoComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row" *ngIf="saldos">
     <div class="col-4">
-      <h2>saldo disponivel</h2>
+      <h2>Saldo Disponivel</h2>
       <p>{{saldos.valorDisponivel | currency}}</p>
-      <mat-form-field appearance="fill" *ngIf="!algumaSolicitacaoSaqueAndamento">
-        <mat-label>valor de saque</mat-label>
+      <mat-form-field appearance="fill" *ngIf="!algumaSolicitacaoSaqueAndamento && chavePix">
+        <mat-label>Valor de Saque</mat-label>
         <input moeda matInput [formControl]="valorSaque">
         <button mat-icon-button matSuffix type="submit" [disabled]="valorSaque.invalid" (click)="pedidoSaque()">
           <mat-icon>send</mat-icon>
@@ -15,13 +15,13 @@
       </mat-form-field>
     </div>
     <div class="col-4">
-      <h2>saldo a receber</h2>
+      <h2>Saldo a Receber</h2>
       <p>{{saldos.valorAReceber | currency}}</p>
     </div>
     <div class="col-4">
       <h2>chave pix</h2>
       <mat-form-field appearance="fill" *ngIf="!chavePix">
-        <mat-label>chave pix</mat-label>
+        <mat-label>Chave pix</mat-label>
         <input matInput [formControl]="chavePixControl">
         <button mat-icon-button matSuffix type="submit" [disabled]="chavePixControl.invalid" (click)="adicionaChavePix()">
           <mat-icon>send</mat-icon>
@@ -33,7 +33,7 @@
     </div>
   </div>
   <div class="row">
-    <h2>Extrato dos últimos 7 dias</h2>
+    <h2>Extrato dos Últimos 7 Dias</h2>
     <div class="col-12">
       <table style="width: 100%;" mat-table [dataSource]="movimentos">
 

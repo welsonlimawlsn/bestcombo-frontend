@@ -59,32 +59,6 @@ export class CadastroUsuarioComponent implements OnInit {
       parceiro: [false]
     });
 
-    this.subscribeCEPControl().subscribe(endereco => this.atualizaEndereco(endereco));
-  }
-
-  private subscribeCEPControl(): Observable<any> {
-    return this.formulario.get('endereco.cep')?.valueChanges.pipe(
-      filter(cep => cep.length === 8),
-      distinct(),
-      switchMap((cep) => this.enderecoService.buscaEnderecoPorCEP(cep)),
-      filter((cep: any) => {
-        let isDF = cep.estado === 'DF';
-
-        if (!isDF) {
-          this.alertaService.showAlerta('CEP inválido', 'O bestcombo por enquanto está presente somente no Distrito Federal')
-        }
-
-        return isDF;
-      }),
-      catchError(() => this.subscribeCEPControl())
-    ) ?? of();
-  }
-
-  private atualizaEndereco(endereco: any) {
-    this.formulario.get('endereco.rua')?.setValue(endereco.rua);
-    this.formulario.get('endereco.cidade')?.setValue(endereco.cidade);
-    this.formulario.get('endereco.estado')?.setValue(endereco.estado);
-    this.formulario.get('endereco.bairro')?.setValue(endereco.bairro);
   }
 
   cadastraUsuario() {

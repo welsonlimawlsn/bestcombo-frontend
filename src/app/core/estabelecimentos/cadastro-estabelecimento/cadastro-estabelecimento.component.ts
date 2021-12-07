@@ -8,6 +8,7 @@ import {Categoria} from "../../../services/http/responses-dto";
 import {ArquivoService} from "../../../services/arquivo.service";
 import {filter, switchMap} from "rxjs/operators";
 import {EnderecoService} from "../../../services/endereco.service";
+import {AlertaService} from "../../../services/alerta.service";
 
 @Component({
   selector: 'app-cadastro-estabelecimento',
@@ -30,7 +31,8 @@ export class CadastroEstabelecimentoComponent implements OnInit {
     private router: Router,
     private categoriaService: CategoriaService,
     private arquivoService: ArquivoService,
-    private enderecoService: EnderecoService
+    private enderecoService: EnderecoService,
+    private alertaService: AlertaService
   ) {
   }
 
@@ -61,17 +63,6 @@ export class CadastroEstabelecimentoComponent implements OnInit {
       this.categorias = response.categorias
         .sort((a, b) => (a.nome as string).localeCompare(b.nome));
     });
-    this.formulario.get('endereco.cep')?.valueChanges.pipe(
-      filter(cep => cep.length === 8),
-      switchMap((cep) => this.enderecoService.buscaEnderecoPorCEP(cep))
-    ).subscribe(endereco => this.atualizaEndereco(endereco));
-  }
-
-  private atualizaEndereco(endereco: any) {
-    this.formulario.get('endereco.rua')?.setValue(endereco.rua);
-    this.formulario.get('endereco.cidade')?.setValue(endereco.cidade);
-    this.formulario.get('endereco.estado')?.setValue(endereco.estado);
-    this.formulario.get('endereco.bairro')?.setValue(endereco.bairro);
   }
 
   cadastraLoja() {
@@ -80,7 +71,8 @@ export class CadastroEstabelecimentoComponent implements OnInit {
         switchMap(response => {
           this.formulario.get('imagem')?.setValue(response.nomeArquivo);
           return this.estabelecimentoService.cadastraEstabelecimento(this.formulario.value);
-        })
+        }),
+        switchMap(() => this.alertaService.showAlerta('Sucesso!', 'Cadastro realizado com sucesso!').afterClosed())
       ).subscribe(() => this.router.navigate(['/parceiros', 'produtos']));
     }
   }
